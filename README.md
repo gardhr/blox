@@ -73,65 +73,7 @@ typedef struct
 
 `void blox_for_each(TYPE, buffer, action)`
 
-`typedef int (*blox_compare)(const void*, const void*)`
-
 `blox_sort(TYPE, buffer, compare)`
 
 `blox_search(TYPE, buffer, key, compare)`
-
-`int blox_char_ascending(char* left, char* right)`
-
-`int blox_byte_ascending(unsigned char* left, unsigned char* right)`
-
-`int blox_short_ascending(short* left, short* right)`
-
-`int blox_ushort_ascending(unsigned short* left, unsigned short* right)` 
-
-`int blox_int_ascending(int* left, int* right)`
-
-`int blox_uint_ascending(unsigned int* left, unsigned int* right)`
-
-`int blox_long_ascending(long* left, long* right)`
-
-`int blox_ulong_ascending(unsigned long* left, unsigned long* right)`
-
-`int blox_llong_ascending(long long* left, long long* right)`
-
-`int blox_ullong_ascending(unsigned long long* left, unsigned long long* right)`
-
-`int blox_size_t_ascending(size_t* left, size_t* right)` 
-
-`int blox_float_ascending(float* left, int* right)`
-
-`int blox_double_ascending(double* left, double* right)` 
-
-`int blox_text_ascending(char** left, char** right)`
-
-`int blox_char_descending(char* left, char* right)` 
-
-`int blox_byte_descending(unsigned char* left, unsigned char* right)`
-
-`int blox_short_descending(short* left, short* right)`
-
-`int blox_ushort_descending(unsigned short* left, unsigned short* right)`
-
-`int blox_int_descending(int* left, int* right)` 
-
-`int blox_uint_descending(unsigned int* left, unsigned int* right)`
-
-`int blox_long_descending(long* left, long* right)` 
-
-`int blox_ulong_descending(unsigned long* left, unsigned long* right)` 
-
-`int blox_llong_descending(long long* left, long long* right)`
-
-`int blox_ullong_descending(unsigned long long* left, unsigned long long* right)`
-
-`int blox_size_t_descending(size_t* left, size_t* right)` 
-
-`int blox_float_descending(float* left, int* right)`
-
-`int blox_double_descending(double* left, double* right)` 
-
-`int blox_text_descending(char** left, char** right)`
 

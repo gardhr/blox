@@ -236,59 +236,5 @@ typedef int (*blox_compare)(const void*, const void*);
 #define blox_search(TYPE, buffer, key, compare)\
  ((TYPE*)bsearch(&key, (buffer).data, (buffer).length, sizeof(TYPE), (blox_compare)compare))
 
-#define RETURN_BLOX_COMPARE_ASCENDING(TYPE, left, right)\
-TYPE lhs = *left, rhs = *right; return (lhs < rhs ? -1 : lhs > rhs ? 1 : 0)
-
-int blox_char_ascending(char* left, char* right) { RETURN_BLOX_COMPARE_ASCENDING(char, left, right); }
-int blox_byte_ascending(unsigned char* left, unsigned char* right) { RETURN_BLOX_COMPARE_ASCENDING(unsigned char, left, right); }
-int blox_short_ascending(short* left, short* right) { RETURN_BLOX_COMPARE_ASCENDING(short, left, right); }
-int blox_ushort_ascending(unsigned short* left, unsigned short* right) { RETURN_BLOX_COMPARE_ASCENDING(unsigned short, left, right); }
-int blox_int_ascending(int* left, int* right) { RETURN_BLOX_COMPARE_ASCENDING(int, left, right); }
-int blox_uint_ascending(unsigned int* left, unsigned int* right) { RETURN_BLOX_COMPARE_ASCENDING(unsigned int, left, right); }
-int blox_long_ascending(long* left, long* right) { RETURN_BLOX_COMPARE_ASCENDING(long, left, right); }
-int blox_ulong_ascending(unsigned long* left, unsigned long* right) { RETURN_BLOX_COMPARE_ASCENDING(unsigned long, left, right); }
-int blox_llong_ascending(long long* left, long long* right) { RETURN_BLOX_COMPARE_ASCENDING(long long, left, right); }
-int blox_ullong_ascending(unsigned long long* left, unsigned long long* right) { RETURN_BLOX_COMPARE_ASCENDING(unsigned long long, left, right); }
-int blox_size_t_ascending(size_t* left, size_t* right) { RETURN_BLOX_COMPARE_ASCENDING(size_t, left, right); }
-int blox_float_ascending(float* left, int* right) { RETURN_BLOX_COMPARE_ASCENDING(float, left, right); }
-int blox_double_ascending(double* left, double* right) { RETURN_BLOX_COMPARE_ASCENDING(double, left, right); }
-int blox_text_ascending(char** left, char** right)
-{
- char* lhs = *left;
- char* rhs = *right;
- if(lhs == NULL)
-  return -1;
- if(rhs == NULL)
-   return 1;
- return strcmp(lhs, rhs);
-}
-
-#define RETURN_BLOX_COMPARE_DESCENDING(TYPE, left, right)\
-RETURN_BLOX_COMPARE_ASCENDING(TYPE, right, left)
-
-int blox_char_descending(char* left, char* right) { RETURN_BLOX_COMPARE_DESCENDING(char, right, left); }
-int blox_byte_descending(unsigned char* left, unsigned char* right) { RETURN_BLOX_COMPARE_DESCENDING(unsigned char, right, left); }
-int blox_short_descending(short* left, short* right) { RETURN_BLOX_COMPARE_DESCENDING(short, right, left); }
-int blox_ushort_descending(unsigned short* left, unsigned short* right) { RETURN_BLOX_COMPARE_DESCENDING(unsigned short, right, left); }
-int blox_int_descending(int* left, int* right) { RETURN_BLOX_COMPARE_DESCENDING(int, right, left); }
-int blox_uint_descending(unsigned int* left, unsigned int* right) { RETURN_BLOX_COMPARE_DESCENDING(unsigned int, right, left); }
-int blox_long_descending(long* left, long* right) { RETURN_BLOX_COMPARE_DESCENDING(long, right, left); }
-int blox_ulong_descending(unsigned long* left, unsigned long* right) { RETURN_BLOX_COMPARE_DESCENDING(unsigned long, right, left); }
-int blox_llong_descending(long long* left, long long* right) { RETURN_BLOX_COMPARE_DESCENDING(long long, right, left); }
-int blox_ullong_descending(unsigned long long* left, unsigned long long* right) { RETURN_BLOX_COMPARE_DESCENDING(unsigned long long, right, left); }
-int blox_size_t_descending(size_t* left, size_t* right) { RETURN_BLOX_COMPARE_DESCENDING(size_t, left, right); }
-int blox_float_descending(float* left, int* right) { RETURN_BLOX_COMPARE_DESCENDING(float, right, left); }
-int blox_double_descending(double* left, double* right) { RETURN_BLOX_COMPARE_DESCENDING(double, right, left); }
-int blox_text_descending(char** left, char** right)
-{
- char* lhs = *left;
- char* rhs = *right;
- if(lhs == NULL)
-  return 1;
- if(rhs == NULL)
-   return -1;
- return strcmp(rhs, lhs);
-}
-
 #endif // BLOX_H_INCLUDED
 
