@@ -181,13 +181,12 @@ blox blox_make_(size_t length, size_t size)
  }\
  while(0)
 
-blox blox_clone_(blox other, size_t size)
+blox blox_clone_(blox other, size_t width)
 {
- blox buffer = {0};
  size_t length = other.length;
- size_t actual = length * size;
- buffer.data = malloc(actual);
- memcpy(buffer.data, other.data, actual);
+ size_t size = length * width;
+ blox buffer = blox_make(char, size);
+ memcpy(buffer.data, other.data, size);
  buffer.length = buffer.capacity = length;
  return buffer;
 }
