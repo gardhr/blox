@@ -215,7 +215,7 @@ blox blox_clone_(blox other, size_t size)
  do\
  {\
   free((buffer).data);\
-  blox_reset(buffer);\
+  blox_drop(buffer);\
  }\
  while(0)
 
