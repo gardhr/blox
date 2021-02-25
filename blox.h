@@ -69,7 +69,7 @@ blox blox_make_(size_t length, size_t size)
 
 #define blox_shrink(buffer) ((buffer).length = 0)
 
-#define blox_reset(buffer)\
+#define blox_drop(buffer)\
  do\
  {\
   (buffer).data = NULL;\

@@ -31,7 +31,7 @@ typedef struct
 
 `void blox_shrink(buffer)`
 
-`void blox_reset(buffer)`
+`void blox_drop(buffer)`
 
 `void blox_clear_range(TYPE, buffer, start, end)`
 
