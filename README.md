@@ -15,7 +15,7 @@ typedef struct
 
 Returns a zero-initialized blox
 
-  
+<br>  
 
 `TYPE* blox_data(TYPE, buffer)`
 
