@@ -73,7 +73,7 @@ typedef struct
 
 `void blox_for_each(TYPE, buffer, action)`
 
-`typedef int (*blox_compare)(const void*, const void*)`;
+`typedef int (*blox_compare)(const void*, const void*)`
 
 `blox_sort(TYPE, buffer, compare)`
 
