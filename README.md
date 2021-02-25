@@ -11,7 +11,7 @@ typedef struct
  blox;
 ```
 
-`blox blox_nil()`
+`blox blox_nil(void)`
 
 `TYPE* blox_data(TYPE, buffer)`
 
@@ -73,7 +73,7 @@ typedef struct
 
 `void blox_for_each(TYPE, buffer, action)`
 
-`blox_sort(TYPE, buffer, compare)`
+`void blox_sort(TYPE, buffer, compare)`
 
-`blox_search(TYPE, buffer, key, compare)`
+`void blox_search(TYPE, buffer, key, compare)`
 
