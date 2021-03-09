@@ -11,15 +11,69 @@ typedef struct
  blox;
 ```
 
+`TYPE* blox_data(TYPE, buffer)`
+
+Returns a pointer to the first element (typecast of `buffer.data`)
+
+<br>
+
+`size_t blox_length(buffer)`
+
+Returns the number of elements (same as `buffer.length`)
+
+<br>
+
+`size_t blox_capacity(buffer)`
+
+Returns the number of elements reserved by the container
+
+<br>
+
+`bool blox_empty(buffer)`
+
+Returns `true` if the blox is empty (buffer.length == 0)
+
+<br>
+
 `blox blox_nil(void)`
 
 Returns a nil blox
 
 <br>
 
-`TYPE* blox_data(TYPE, buffer)`
+`blox blox_create(TYPE)`
 
-Returns a pointer to the first element
+Returns a blox with zero elements
+
+<br>
+
+`blox blox_make(TYPE, length)`
+
+Returns a blox with `length` elements (all zeroed out)
+
+<br>
+
+`void blox_resize(TYPE, buffer, size)`
+
+Resizes the container
+
+<br>
+
+`void blox_shrink(TYPE, buffer)`
+
+Resizes the container to zero elements
+
+<br>
+
+`void blox_free(buffer)`
+
+Frees a blox container
+
+<br>
+
+`void blox_drop(buffer)`
+
+Zeroes out the container, but doesn't free it (use with care!)
 
 <br>
 
@@ -31,55 +85,13 @@ Returns a pointer to the element at `index`
 
 `TYPE blox_get(TYPE, buffer, index)`
 
-Returns a reference to the element at `index`
+Returns a reference to the element at `index` (not bounds checked!)
 
 <br>
 
 `void blox_set(TYPE, buffer, index, value)`
 
-Sets the element at `index` to `value`
-
-<br>
-
-`size_t blox_length(buffer)`
-
-Returns the number of elements
-
-<br>
-
-`bool blox_empty(buffer)`
-
-Returns `true` if the blox is empty
-
-<br>
-
-`size_t blox_capacity(buffer)`
-
-Returns the number of elements reserved by the container
-
-<br>
-
-`blox blox_make(TYPE, length)`
-
-Returns a blox with `length` elements (all zeroed out)
-
-<br>
-
-`blox blox_create(TYPE)`
-
-Returns a blox with zero elements
-
-<br>
-
-`void blox_shrink(TYPE, buffer)`
-
-Resizes the container to zero elements
-
-<br>
-
-`void blox_drop(buffer)`
-
-Zeroes out the container, but doesn't free it (use with care!)
+Sets the element at `index` to `value` (not bounds checked!)
 
 <br>
 
@@ -92,12 +104,6 @@ Zeroes out all elements from index `start` up to (but excluding) `end`
 `void blox_insert(TYPE, buffer, index, value)`
 
 Inserts `value` at `index` of the (possibly empty) container
-
-<br>
-
-`void blox_resize(TYPE, buffer, size)`
-
-Resizes the container
 
 <br>
 
@@ -188,12 +194,6 @@ Returns a copy of `buffer`
 `void blox_swap(buffer, other)`
 
 Swaps `buffer` with `other`
-
-<br>
-
-`void blox_free(buffer)`
-
-Frees a blox container
 
 <br>
 
