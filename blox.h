@@ -44,6 +44,8 @@ blox blox_nil(void)
 
 #define blox_data(TYPE, buffer) ((TYPE*)(buffer).data)
 
+#define blox_data(TYPE, buffer) ((TYPE*)(buffer).data)
+
 #define blox_index(TYPE, buffer, index) (blox_data(TYPE, buffer) + (index))
 
 #define blox_get(TYPE, buffer, index) (*blox_index(TYPE, buffer, index))
@@ -67,7 +69,9 @@ blox blox_make_(size_t length, size_t size)
 
 #define blox_make(TYPE, length) blox_make_(length, sizeof(TYPE))
 
-#define blox_shrink(buffer) ((buffer).length = 0)
+#define blox_create(TYPE) blox_make(TYPE, 0)
+
+#define blox_shrink(TYPE, buffer) blox_resize(TYPE, buffer, 0)
 
 #define blox_drop(buffer)\
  do\
@@ -109,7 +113,7 @@ blox blox_make_(size_t length, size_t size)
  {\
   size_t request = (size);\
   size_t capacity = (buffer).capacity;\
-  if(request > capacity)\
+  if(request >= capacity)\
   {\
    size_t expanded = capacity ? capacity : 1;\
    while(expanded < request)\
@@ -118,8 +122,11 @@ blox blox_make_(size_t length, size_t size)
    (buffer).capacity = expanded;\
   }\
   size_t length = (buffer).length;\
+  TYPE* last = blox_index(TYPE, buffer, length);\
   if(request > length)\
    memset(blox_index(TYPE, buffer, length), 0, ((request - length) + 1) * sizeof(TYPE));\
+  else\
+   memset(blox_index(TYPE, buffer, request), 0, sizeof(TYPE));\
   (buffer).length = request;\
  }\
  while(0)
