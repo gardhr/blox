@@ -25,7 +25,7 @@ Returns the number of elements (same as `buffer.length`)
 
 `size_t blox_capacity(buffer)`
 
-Returns the number of elements reserved by the container
+Returns the number of elements reserved by the container (same as `buffer.capacity`)
 
 <br>
 
