@@ -187,7 +187,7 @@ Copies `source` to `buffer`
 
 `blox blox_clone(TYPE, buffer)`
 
-Returns a copy of `buffer` (don't forget to clean up with `blox_free(buffer)`!)
+Returns a copy of `buffer`
 
 <br>
 
