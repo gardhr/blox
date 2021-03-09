@@ -31,7 +31,7 @@ Returns the number of elements reserved by the container (same as `buffer.capaci
 
 `bool blox_empty(buffer)`
 
-Returns `true` if the blox is empty (buffer.length == 0)
+Returns `true` if the blox is empty (`buffer.length == 0`)
 
 <br>
 
