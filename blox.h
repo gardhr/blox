@@ -60,15 +60,15 @@ blox blox_nil(void)
 
 #define blox_capacity(buffer) (buffer).capacity
 
-blox blox_make_(size_t length, size_t size)
+blox blox_make_(size_t width, size_t length)
 {
  blox buffer = {0};
- buffer.data = calloc(length + 1, size);
+ buffer.data = calloc(length + 1, width);
  buffer.length = buffer.capacity = length;
  return buffer;
 }
 
-#define blox_make(TYPE, length) blox_make_(length, sizeof(TYPE))
+#define blox_make(TYPE, length) blox_make_(sizeof(TYPE), length)
 
 #define blox_create(TYPE) blox_make(TYPE, 0)
 
