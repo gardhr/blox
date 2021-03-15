@@ -1,4 +1,5 @@
-/*
+/* Blox Array Library
+
 MIT License
 
 Copyright (c) 2021 Sebastian Garth
