@@ -115,14 +115,14 @@ blox blox_make_(size_t length, size_t size)
   size_t capacity = (buffer).capacity;\
   if(request >= capacity)\
   {\
-   size_t expanded = capacity ? capacity : 1;\
-   while(expanded < request)\
-    expanded <<= 1;\
-   (buffer).data = realloc((buffer).data, (expanded + 1) * sizeof(TYPE));\
-   (buffer).capacity = expanded;\
+   if(capacity == 0)\
+    ++capacity;\
+   while(capacity <= request)\
+    capacity <<= 1;\
+   (buffer).data = realloc((buffer).data, capacity * sizeof(TYPE));\
+   (buffer).capacity = capacity;\
   }\
   size_t length = (buffer).length;\
-  TYPE* last = blox_index(TYPE, buffer, length);\
   if(request > length)\
    memset(blox_index(TYPE, buffer, length), 0, ((request - length) + 1) * sizeof(TYPE));\
   else\
