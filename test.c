@@ -6,7 +6,7 @@ int main(int argc, char** argv)
  blox text = blox_create(char);
  if(argc == 1)
   blox_append_string(char, text, "Looking backward...");
- for(;;)
+ else for(;;)
  {
   char* data = *(++argv);
   if(data == NULL)
