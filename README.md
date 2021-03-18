@@ -59,6 +59,12 @@ Use `array` as if it were a normal blox object (note: typically used in conjunct
 
 <br>
 
+`blox blox_use_string(TYPE, string)`
+
+Use a zero-terminated `string` of `TYPE` as if it were a normal blox object (note: typically used in conjunction with `blox_drop` rather than `blox_free`)
+
+<br>
+
 `blox blox_reserved(TYPE, length)`
 
 Returns a blox with `length` elements reserved (nominal size of container will be zero)

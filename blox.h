@@ -82,7 +82,34 @@ blox blox_use_(const void* address, size_t length)
 
 #define blox_use(array, length)\
  blox_use_(array, length)
+ 
+blox blox_use_string_(size_t width, const void* address)
+{
+ typedef unsigned char byte;
+ byte* base = ((byte*)address);
+ byte* current = base;
+ for(;;)
+ {
+  size_t count = width;
+  do
+  {
+   if(*current != 0)
+    current += count;
+   else
+    ++current; 
+  }  
+  while(--count);
+  if(count == 0)
+   break;
+ }
+ size_t length = current - base;
+ blox buffer = {base, length, length};
+ return buffer;
+}
 
+#define blox_use_string(TYPE, string)\
+ blox_use_string_(sizeof(TYPE), string)
+ 
 #define blox_reserved(TYPE, length)\
  blox_make_(sizeof(TYPE), length, 1)
 
