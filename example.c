@@ -39,18 +39,6 @@ void reverse_info(info* my)
 {
  my->id = -my->id;
  blox_reverse(char, my->tag);
- return;
-
-
-
- blox stack = {0};
- blox_swap(stack, my->tag);
- while(!blox_empty(stack))
- {
-  blox_push(char, my->tag, blox_back(char, stack));
-  blox_pop(char, stack);
- }
- blox_free(stack);
 }
 
 int main(int argc, char** argv)
