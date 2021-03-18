@@ -73,6 +73,8 @@ blox blox_make_(size_t width, size_t length, int empty)
 #define blox_make(TYPE, length)\
  blox_make_(sizeof(TYPE), length, 0)
 
+#define blox_from_string(TYPE, string)\
+ blox_clone(TYPE, blox_use_string(TYPE, string))
 
 blox blox_use_(const void* address, size_t length)
 {
@@ -82,7 +84,9 @@ blox blox_use_(const void* address, size_t length)
 
 #define blox_use(array, length)\
  blox_use_(array, length)
- 
+
+#include "tools.h"
+
 blox blox_use_string_(size_t width, const void* address)
 {
  typedef unsigned char byte;
@@ -94,22 +98,25 @@ blox blox_use_string_(size_t width, const void* address)
   do
   {
    if(*current != 0)
+   {
     current += count;
+    break;
+   }
    else
-    ++current; 
-  }  
+    ++current;
+  }
   while(--count);
   if(count == 0)
    break;
  }
- size_t length = current - base;
+ size_t length = (current - base) - 1;
  blox buffer = {base, length, length};
  return buffer;
 }
 
 #define blox_use_string(TYPE, string)\
  blox_use_string_(sizeof(TYPE), string)
- 
+
 #define blox_reserved(TYPE, length)\
  blox_make_(sizeof(TYPE), length, 1)
 
