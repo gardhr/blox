@@ -137,7 +137,7 @@ blox blox_make_(size_t width, size_t length, int empty)
   (buffer).length = request;\
  }\
  while(0)
- 
+
 #define blox_reserve(TYPE, buffer, size)\
  do\
  {\
@@ -145,7 +145,7 @@ blox blox_make_(size_t width, size_t length, int empty)
   blox_resize(TYPE, buffer, size);\
   (buffer).length = saved;\
  }\
- while(0) 
+ while(0)
 
 #define blox__safe_previous(buffer)\
 ((buffer).length ? ((buffer).length - 1) : (buffer).length)

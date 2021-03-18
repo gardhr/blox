@@ -251,6 +251,12 @@ Applies `action` to each element of `buffer` (function should take a `TYPE*` as 
 
 <br>
 
+`void blox_visit(TYPE, buffer, action, userdata)`
+
+Applies `action` to each element of `buffer` (function should take a `TYPE*` as it's first argument, plus an optional `void*` argument for `userdata`)
+
+<br>
+
 `void blox_sort(TYPE, buffer, compare)`
 
 Sort using `compare`, which should take two arguments of type `TYPE**`
