@@ -59,9 +59,27 @@ Use `array` as if it were a normal blox object (note: typically used in conjunct
 
 <br>
 
+`blox blox_use_array(TYPE, array, length)`
+
+Use `array` as if it were a normal blox object (note: typically used in conjunction with `blox_drop` rather than `blox_free`)
+
+<br>
+
+`blox blox_from_array(TYPE, array, length)`
+
+Construct a new blox containing a copy of `array`
+
+<br>
+
 `blox blox_use_string(TYPE, string)`
 
 Use a zero-terminated `string` of `TYPE` as if it were a normal blox object (note: typically used in conjunction with `blox_drop` rather than `blox_free`)
+
+<br>
+
+`blox blox_from_string(TYPE, string)`
+
+Construct a new blox from a zero-terminated `string` of `TYPE`
 
 <br>
 
