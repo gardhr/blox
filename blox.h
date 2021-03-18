@@ -60,15 +60,21 @@ blox blox_nil(void)
 
 #define blox_capacity(buffer) (buffer).capacity
 
-blox blox_make_(size_t width, size_t length)
+blox blox_make_(size_t width, size_t length, int empty)
 {
  blox buffer = {0};
  buffer.data = calloc(length + 1, width);
- buffer.length = buffer.capacity = length;
+ buffer.capacity = length;
+ if(!empty)
+  buffer.length = length;
  return buffer;
 }
 
-#define blox_make(TYPE, length) blox_make_(sizeof(TYPE), length)
+#define blox_make(TYPE, length)\
+ blox_make_(sizeof(TYPE), length, 0)
+
+#define blox_reserved(TYPE, length)\
+ blox_make_(sizeof(TYPE), length, 1)
 
 #define blox_create(TYPE) blox_make(TYPE, 0)
 
@@ -131,6 +137,15 @@ blox blox_make_(size_t width, size_t length)
   (buffer).length = request;\
  }\
  while(0)
+ 
+#define blox_reserve(TYPE, buffer, size)\
+ do\
+ {\
+  size_t saved = (buffer).length;\
+  blox_resize(TYPE, buffer, size);\
+  (buffer).length = saved;\
+ }\
+ while(0) 
 
 #define blox__safe_previous(buffer)\
 ((buffer).length ? ((buffer).length - 1) : (buffer).length)
@@ -199,31 +214,6 @@ blox blox_clone_(blox other, size_t width)
  return buffer;
 }
 
-int blox_compare_(void* lhs, size_t lmx, void* rhs, size_t rmx, size_t width)
-{
- if(lmx != rmx)
-  return lmx < rmx ? -1 : 1;
- return memcmp(lhs, rhs, lmx * width);
-}
-
-#define blox_compare(TYPE, lbx, rbx)\
- blox_compare_((lbx).data, (lbx).length, (rbx).data, (rbx).length, sizeof(TYPE))
-
-#define blox_equal(TYPE, lbx, rbx)\
- (blox_compare(TYPE, lbx, rbx) == 0)
-
-#define blox_less(TYPE, lbx, rbx)\
- (blox_compare(TYPE, lbx, rbx) < 0)
-
-#define blox_less_or_equal(TYPE, lbx, rbx)\
- (blox_compare(TYPE, lbx, rbx) <= 0)
-
-#define blox_greater(TYPE, lbx, rbx)\
- (blox_compare(TYPE, lbx, rbx) > 0)
-
-#define blox_greater_or_equal(TYPE, lbx, rbx)\
- (blox_compare(TYPE, lbx, rbx) >= 0)
-
 #define blox_copy(TYPE, buffer, source)\
  do\
  {\
@@ -278,6 +268,31 @@ typedef int (*blox_comparison)(const void*, const void*);
 
 #define blox_search(TYPE, buffer, key, comparison)\
  ((TYPE*)bsearch(&key, (buffer).data, (buffer).length, sizeof(TYPE), (blox_comparison)comparison))
+
+int blox_compare_(void* lhs, size_t lmx, void* rhs, size_t rmx, size_t width)
+{
+ if(lmx != rmx)
+  return lmx < rmx ? -1 : 1;
+ return memcmp(lhs, rhs, lmx * width);
+}
+
+#define blox_compare(TYPE, lbx, rbx)\
+ blox_compare_((lbx).data, (lbx).length, (rbx).data, (rbx).length, sizeof(TYPE))
+
+#define blox_equal(TYPE, lbx, rbx)\
+ (blox_compare(TYPE, lbx, rbx) == 0)
+
+#define blox_less(TYPE, lbx, rbx)\
+ (blox_compare(TYPE, lbx, rbx) < 0)
+
+#define blox_less_or_equal(TYPE, lbx, rbx)\
+ (blox_compare(TYPE, lbx, rbx) <= 0)
+
+#define blox_greater(TYPE, lbx, rbx)\
+ (blox_compare(TYPE, lbx, rbx) > 0)
+
+#define blox_greater_or_equal(TYPE, lbx, rbx)\
+ (blox_compare(TYPE, lbx, rbx) >= 0)
 
 #endif // BLOX_H_INCLUDED
 

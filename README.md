@@ -53,9 +53,57 @@ Returns a blox with `length` elements (all zeroed out)
 
 <br>
 
+`blox blox_reserved(TYPE, length)`
+
+Returns a blox with `length` elements reserved (nominal size of container will be zero)
+
+<br>
+
 `void blox_resize(TYPE, buffer, size)`
 
 Resizes the container
+
+<br>
+
+`void blox_reserve(TYPE, buffer, size)`
+
+Reserves `size` elements (buffer size is unchanged)
+
+<br>
+
+`int blox_compare(TYPE, left, right)`
+
+Compares two containers (first compares lengths; if equal, a bit-by-bit comparison of the two is made)
+
+<br>
+
+`bool blox_equal(TYPE, left, right)`
+
+Returns true if `left` and `right` compare equal
+
+<br>
+
+`bool blox_less(TYPE, left, right)`
+
+Returns true if `left` compares less than `right`
+
+<br>
+
+`bool blox_less_or_equal(TYPE, left, right)`
+
+Returns true if `left` compares less or equal to `right`
+
+<br>
+
+`bool blox_greater(TYPE, left, right)`
+
+Returns true if `left` compares greater than `right`
+
+<br>
+
+`bool blox_greater_or_equal(TYPE, left, right)`
+
+Returns true if `left` compares greater than or equal to `right`
 
 <br>
 
