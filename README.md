@@ -53,6 +53,12 @@ Returns a blox with `length` elements (all zeroed out)
 
 <br>
 
+`blox blox_use(array, length)`
+
+Use `array` as if it were a normal blox object (note: typically used in conjunction with `blox_drop` rather than `blox_free`)
+
+<br>
+
 `blox blox_reserved(TYPE, length)`
 
 Returns a blox with `length` elements reserved (nominal size of container will be zero)

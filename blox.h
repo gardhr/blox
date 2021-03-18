@@ -73,6 +73,16 @@ blox blox_make_(size_t width, size_t length, int empty)
 #define blox_make(TYPE, length)\
  blox_make_(sizeof(TYPE), length, 0)
 
+
+blox blox_use_(const void* address, size_t length)
+{
+ blox buffer = {(void*)address, length, length};
+ return buffer;
+}
+
+#define blox_use(array, length)\
+ blox_use_(array, length)
+
 #define blox_reserved(TYPE, length)\
  blox_make_(sizeof(TYPE), length, 1)
 
