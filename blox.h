@@ -233,6 +233,21 @@ blox blox_clone_(blox other, size_t width)
  }\
  while(0)
 
+#define blox_reverse(TYPE, buffer)\
+ do\
+ {\
+  TYPE* left = blox_begin(TYPE, buffer);\
+  TYPE* right = blox_end(TYPE, buffer);\
+  TYPE swap;\
+  while(left < --right)\
+  {\
+   swap = *left;\
+   *left++ = *right;\
+   *right = swap;\
+  }\
+ }\
+ while(0)
+
 #define blox_free(buffer)\
  do\
  {\

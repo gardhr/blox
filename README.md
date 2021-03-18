@@ -203,6 +203,12 @@ Returns a pointer to the last element in the container
 
 <br>
 
+`void blox_reverse(TYPE, buffer)`
+
+Reverses the elements in `buffer` (inplace)
+
+<br>
+
 `void blox_append(TYPE, buffer, other)`
 
 Appends the blox `other` to `buffer`

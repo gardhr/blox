@@ -38,6 +38,11 @@ void free_info(info* my)
 void reverse_info(info* my)
 {
  my->id = -my->id;
+ blox_reverse(char, my->tag);
+ return;
+
+
+
  blox stack = {0};
  blox_swap(stack, my->tag);
  while(!blox_empty(stack))
