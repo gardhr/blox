@@ -199,6 +199,31 @@ blox blox_clone_(blox other, size_t width)
  return buffer;
 }
 
+int blox_compare_(void* lhs, size_t lmx, void* rhs, size_t rmx, size_t width)
+{
+ if(lmx != rmx)
+  return lmx < rmx ? -1 : 1;
+ return memcmp(lhs, rhs, lmx * width);
+}
+
+#define blox_compare(TYPE, lbx, rbx)\
+ blox_compare_((lbx).data, (lbx).length, (rbx).data, (rbx).length, sizeof(TYPE))
+
+#define blox_equal(TYPE, lbx, rbx)\
+ (blox_compare(TYPE, lbx, rbx) == 0)
+
+#define blox_less(TYPE, lbx, rbx)\
+ (blox_compare(TYPE, lbx, rbx) < 0)
+
+#define blox_less_or_equal(TYPE, lbx, rbx)\
+ (blox_compare(TYPE, lbx, rbx) <= 0)
+
+#define blox_greater(TYPE, lbx, rbx)\
+ (blox_compare(TYPE, lbx, rbx) > 0)
+
+#define blox_greater_or_equal(TYPE, lbx, rbx)\
+ (blox_compare(TYPE, lbx, rbx) >= 0)
+
 #define blox_copy(TYPE, buffer, source)\
  do\
  {\
@@ -236,13 +261,23 @@ blox blox_clone_(blox other, size_t width)
  }\
  while(0)
 
-typedef int (*blox_compare)(const void*, const void*);
+#define blox_visit(TYPE, buffer, action, userdata)\
+ do\
+ {\
+  typedef void (*callback)(const void*, void*);\
+  callback step = (callback)action;\
+  for(size_t index = 0, length = (buffer).length; index < length; ++index)\
+   step(blox_index(TYPE, buffer, index), userdata);\
+ }\
+ while(0)
 
-#define blox_sort(TYPE, buffer, compare)\
- qsort((buffer).data, (buffer).length, sizeof(TYPE), (blox_compare)compare)
+typedef int (*blox_comparison)(const void*, const void*);
 
-#define blox_search(TYPE, buffer, key, compare)\
- ((TYPE*)bsearch(&key, (buffer).data, (buffer).length, sizeof(TYPE), (blox_compare)compare))
+#define blox_sort(TYPE, buffer, comparison)\
+ qsort((buffer).data, (buffer).length, sizeof(TYPE), (blox_comparison)comparison)
+
+#define blox_search(TYPE, buffer, key, comparison)\
+ ((TYPE*)bsearch(&key, (buffer).data, (buffer).length, sizeof(TYPE), (blox_comparison)comparison))
 
 #endif // BLOX_H_INCLUDED
 
