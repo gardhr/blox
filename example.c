@@ -71,6 +71,7 @@ int main(int argc, char** argv)
  blox_for_each(info, stuff, print_info);
 
  blox_for_each(info, stuff, free_info);
+ blox_free(stuff);
  return 0;
 }
 
