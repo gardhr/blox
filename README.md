@@ -319,13 +319,13 @@ Applies `action` to each element of `buffer` (function should take a `TYPE*` as 
 
 `void blox_sort(TYPE, buffer, compare)`
 
-Sort using `compare`, which should take two arguments of type `TYPE**`
+Sort using `compare`, which should take two arguments of type `TYPE*`
 
 <br>
 
 `void blox_search(TYPE, buffer, key, compare)`
 
-Binary search using `compare`, which should take two arguments of type `TYPE**`
+Binary search using `compare`, which should take two arguments of type `TYPE*`
 
 <br>
 
