@@ -242,6 +242,17 @@ blox blox_use_string_(size_t width, const void* address)
 #define blox_shift(TYPE, buffer)\
  blox_shift_by(TYPE, buffer, 1)
 
+#define blox_unshift(TYPE, buffer, value)\
+ do\
+ {\
+  size_t length = (buffer).length;\
+  blox_resize(TYPE, (buffer), length + 1);\
+  TYPE* begin = blox_begin(TYPE, buffer);\
+  memmove(begin + 1, begin, length * sizeof(TYPE));\
+  blox_set(TYPE, (buffer), 0, value);\
+ }\
+ while(0)
+
 #define blox_append(TYPE, buffer, other)\
  do\
  {\

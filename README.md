@@ -209,6 +209,12 @@ Removes the first element of the container
 
 <br>
 
+`void blox_unshift(TYPE, buffer, value)`
+
+Inserts `value` at the front of the container (remaining elements are shifted toward the back)
+
+<br>
+
 `void blox_push(TYPE, buffer, value)`
 
 Inserts `value` at the end of the container
