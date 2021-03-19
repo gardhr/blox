@@ -215,6 +215,33 @@ blox blox_use_string_(size_t width, const void* address)
 
 #define blox_top(TYPE, buffer) blox_index(TYPE, buffer, blox__safe_previous(buffer))
 
+#define blox_shrink_by(TYPE, buffer, amount)\
+ do\
+ {\
+  size_t length = blox_length(buffer);\
+  if(amount <= length)\
+   length -= amount;\
+  blox_resize(TYPE, buffer, length);\
+ }\
+ while(0)
+
+#define blox_shift_next(TYPE, buffer, count)\
+ do\
+ {\
+  if(count == 0)\
+   break;\
+  TYPE* begin = blox_begin(TYPE, (buffer));\
+  TYPE* cursor = begin + (count - 1);\
+  if(cursor > blox_end(TYPE, (buffer)))\
+   break; \
+  memmove(begin, cursor, sizeof(TYPE) * count);\
+  blox_shrink_by(TYPE, (buffer), count);\
+ }\
+ while(0)
+
+#define blox_shift(TYPE, buffer)\
+ blox_shift_next(TYPE, buffer, 1)
+
 #define blox_append(TYPE, buffer, other)\
  do\
  {\

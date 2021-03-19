@@ -25,8 +25,8 @@ int compare_info(info* lhs, info* rhs)
 
 void print_info(info* my)
 {
- printf("ID: %d\n", my->id);
  printf("TAG: %s\n", blox_begin(char, my->tag));
+ printf("ID: %d\n", my->id);
 }
 
 void free_info(info* my)
@@ -48,7 +48,8 @@ int main(int argc, char** argv)
  blox_push(info, stuff, make_info("Something", rand()));
  blox_push(info, stuff, make_info("Another Thing", rand()));
  blox_push(info, stuff, make_info("Nothing", 0));
-
+ blox_push(info, stuff, make_info("Three", 3));
+ 
  blox_sort(info, stuff, compare_info);
  puts("\nInfo:");
  blox_for_each(info, stuff, print_info);

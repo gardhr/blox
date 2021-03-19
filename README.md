@@ -95,6 +95,12 @@ Resizes the container
 
 <br>
 
+`void blox_shrink_by(TYPE, buffer, amount)`
+
+Shrinks the container by `amount` elements
+
+<br>
+
 `void blox_reserve(TYPE, buffer, size)`
 
 Reserves `size` elements (buffer size is unchanged)
@@ -188,6 +194,12 @@ Inserts `value` at `index` of the (possibly empty) container
 `void blox_stuff(TYPE, buffer)`
 
 Inserts a zero-filled object of `TYPE` at the end of the container
+
+<br>
+
+`void blox_remove_first(TYPE, buffer, amount)`
+
+Shrinks the container by `amount` elements
 
 <br>
 
