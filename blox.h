@@ -225,7 +225,7 @@ blox blox_use_string_(size_t width, const void* address)
  }\
  while(0)
 
-#define blox_shift_next(TYPE, buffer, count)\
+#define blox_shift_by(TYPE, buffer, count)\
  do\
  {\
   if(count == 0)\
@@ -240,7 +240,7 @@ blox blox_use_string_(size_t width, const void* address)
  while(0)
 
 #define blox_shift(TYPE, buffer)\
- blox_shift_next(TYPE, buffer, 1)
+ blox_shift_by(TYPE, buffer, 1)
 
 #define blox_append(TYPE, buffer, other)\
  do\

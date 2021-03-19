@@ -197,9 +197,15 @@ Inserts a zero-filled object of `TYPE` at the end of the container
 
 <br>
 
-`void blox_remove_first(TYPE, buffer, amount)`
+`void blox_shift_by(TYPE, buffer, amount)`
 
-Shrinks the container by `amount` elements
+Removes the first `amount` elements from the front of the container
+
+<br>
+
+`void blox_shift(TYPE, buffer)`
+
+Removes the first element of the container
 
 <br>
 
