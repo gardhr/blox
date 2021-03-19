@@ -21,7 +21,6 @@ info make_info(const char* tag)
 
 int compare_info(info* lhs, info* rhs)
 {
- puts(blox_data(char, lhs->tag));
  return strcmp(blox_data(char, lhs->tag), blox_data(char, rhs->tag));
 }
 
