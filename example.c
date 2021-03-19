@@ -56,7 +56,7 @@ int main(int argc, char** argv)
  blox_for_each(info, stuff, print_info);
 
  blox_for_each(info, stuff, reverse_info);
- puts("\ndetroS:");
+ puts("\ndesreveR:");
  blox_for_each(info, stuff, print_info);
 
  blox_for_each(info, stuff, free_info);
