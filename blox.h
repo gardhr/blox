@@ -264,6 +264,19 @@ blox blox_use_string_(size_t width, const void* address)
   memcpy(blox_index(TYPE, (buffer), length), (other).data, additional * sizeof(TYPE));\
  }\
  while(0)
+ 
+#define blox_prepend(TYPE, buffer, other)\
+ do\
+ {\
+  size_t length = (buffer).length;\
+  size_t additional = (other).length;\
+  blox_resize(TYPE, (buffer), length + additional);\
+  TYPE* begin = blox_begin(TYPE, buffer);\
+  memmove(begin + additional, begin, length * sizeof(TYPE));\
+  for(size_t index = 0; index < additional; ++index)\
+   blox_set(TYPE, buffer, index, blox_get(TYPE, other, index));\
+ }\
+ while(0) 
 
 #define blox_append_sequence(TYPE, buffer, start, end)\
  do\
@@ -274,7 +287,7 @@ blox blox_use_string_(size_t width, const void* address)
    blox_push(TYPE, (buffer), (TYPE)start[index++]);\
  }\
  while(0)
-
+ 
 #define blox_append_string(TYPE, buffer, array)\
  do\
  {\
@@ -284,6 +297,9 @@ blox blox_use_string_(size_t width, const void* address)
  }\
  while(0)
 
+#define blox_prepend_string(TYPE, buffer, array)\
+ blox_prepend(TYPE, buffer, blox_use_string(TYPE, array))
+
 #define blox_append_array(TYPE, buffer, array, length)\
  do\
  {\
@@ -292,6 +308,9 @@ blox blox_use_string_(size_t width, const void* address)
    blox_push(TYPE, (buffer), (TYPE)array[index++]);\
  }\
  while(0)
+ 
+#define blox_prepend_array(TYPE, buffer, array, length)\
+ blox_prepend_array(TYPE, buffer, blox_use_array(TYPE, array, length)) 
 
 blox blox_clone_(blox other, size_t width)
 {

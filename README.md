@@ -53,6 +53,12 @@ Returns a blox with `length` elements (all zeroed out)
 
 <br>
 
+`blox blox_reserved(TYPE, length)`
+
+Returns a blox with `length` elements reserved (nominal size of container will be zero)
+
+<br>
+
 `blox blox_use(array, length)`
 
 Use `array` as if it were a normal blox object (note: typically used in conjunction with `blox_drop` rather than `blox_free`)
@@ -80,12 +86,6 @@ Use a zero-terminated `string` of `TYPE` as if it were a normal blox object (not
 `blox blox_from_string(TYPE, string)`
 
 Construct a new blox from a zero-terminated `string` of `TYPE`
-
-<br>
-
-`blox blox_reserved(TYPE, length)`
-
-Returns a blox with `length` elements reserved (nominal size of container will be zero)
 
 <br>
 
@@ -269,6 +269,12 @@ Appends the blox `other` to `buffer`
 
 <br>
 
+`void blox_prepend(TYPE, buffer, other)`
+
+Prepends the blox `other` to `buffer`
+
+<br>
+
 `void blox_append_sequence(TYPE, buffer, start, end)`
 
 Appends the sequence from pointer `start` to `end` to the container
@@ -281,9 +287,21 @@ Appends a zero-terminated `array` to the container
 
 <br>
 
+`void blox_prepend_string(TYPE, buffer, array)`
+
+Prepends a zero-terminated `array` to the container
+
+<br>
+
 `void blox_append_array(TYPE, buffer, array, length)`
 
 Appends `length` elements of `array` to the container
+
+<br>
+
+`void blox_prepend_array(TYPE, buffer, array, length)`
+
+Prepends `length` elements of `array` to the container
 
 <br>
 
