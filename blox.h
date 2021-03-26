@@ -171,10 +171,12 @@ blox blox_use_string_(size_t width, const void* address)
   size_t capacity = (buffer).capacity;\
   if(request >= capacity)\
   {\
-   if(capacity == 0)\
-    ++capacity;\
    while(capacity <= request)\
-    capacity <<= 1;\
+   {\
+    capacity *= 1.6180339887498948482;\
+    if(capacity < 2)\
+     capacity += 1;\
+   }\
    (buffer).data = realloc((buffer).data, capacity * sizeof(TYPE));\
    (buffer).capacity = capacity;\
   }\
