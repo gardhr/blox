@@ -228,6 +228,12 @@ Inserts `value` at the front of the container (remaining elements are shifted to
 
 <br>
 
+`void blox_unshift_by(TYPE, buffer, amount)`
+
+Makes space at the front of the container for `amount` (zeroed out) elements (remaining elements are shifted toward the back)
+
+<br>
+
 `void blox_push(TYPE, buffer, value)`
 
 Inserts `value` at the end of the container
