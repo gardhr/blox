@@ -1,7 +1,6 @@
 # blox
 
-Simple array library for C
-
+Blox is single-header array library for C, implemented as a set of macros. 
 
 ```
 typedef struct
@@ -85,18 +84,6 @@ Sets the element at `index` to `value` (not bounds checked!)
 
 <br>
 
-`TYPE blox_front(TYPE, buffer)`
-
-Returns a reference to the first element in the container
-
-<br>
-
-`TYPE blox_back(TYPE, buffer)`
-
-Returns a reference to the last element in the container
-
-<br>
-
 `TYPE* blox_begin(TYPE, buffer)`
 
 Returns a pointer to the first element in the container
@@ -112,6 +99,18 @@ Returns a pointer to the unused element immediately following the last element i
 `TYPE* blox_top(TYPE, buffer)`
 
 Returns a pointer to the last element in the container
+
+<br>
+
+`TYPE blox_front(TYPE, buffer)`
+
+Returns a reference to the first element in the container
+
+<br>
+
+`TYPE blox_back(TYPE, buffer)`
+
+Returns a reference to the last element in the container
 
 <br>
 
