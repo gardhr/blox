@@ -176,7 +176,7 @@ Construct a new blox from a zero-terminated `string` of `TYPE`
 
 `void blox_clear_range(TYPE, buffer, start, end)`
 
-Zeroes out all elements from index `start` up to (but excluding) `end`
+Zeroes out all elements from index `start` up to (but excluding) `end` (the container is ***not*** resized)
 
 <br>
 
