@@ -186,6 +186,12 @@ Zeroes out all elements from index `start` up to (but excluding) `end` (the cont
 
 <br>
 
+`void blox_clear(TYPE, buffer)`
+
+Zeroes out all elements (the container is ***not*** resized)
+
+<br>
+
 `void blox_insert(TYPE, buffer, index, value)`
 
 Inserts `value` at `index` of the (possibly empty) container
