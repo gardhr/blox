@@ -55,6 +55,66 @@ Returns a nil blox
 
 <br>
 
+`void blox_free(buffer)`
+
+Frees a blox container
+
+<br>
+
+`void blox_drop(buffer)`
+
+Zeroes out the container, but doesn't free it (use with care!)
+
+<br>
+
+`TYPE* blox_index(TYPE, buffer, index)`
+
+Returns a pointer to the element at `index`
+
+<br>
+
+`TYPE blox_get(TYPE, buffer, index)`
+
+Returns a reference to the element at `index` (not bounds checked!)
+
+<br>
+
+`void blox_set(TYPE, buffer, index, value)`
+
+Sets the element at `index` to `value` (not bounds checked!)
+
+<br>
+
+`TYPE blox_front(TYPE, buffer)`
+
+Returns a reference to the first element in the container
+
+<br>
+
+`TYPE blox_back(TYPE, buffer)`
+
+Returns a reference to the last element in the container
+
+<br>
+
+`TYPE* blox_begin(TYPE, buffer)`
+
+Returns a pointer to the first element in the container
+
+<br>
+
+`TYPE* blox_end(TYPE, buffer)`
+
+Returns a pointer to the unused element immediately following the last element in the container
+
+<br>
+
+`TYPE* blox_top(TYPE, buffer)`
+
+Returns a pointer to the last element in the container
+
+<br>
+
 `void blox_resize(TYPE, buffer, size)`
 
 Resizes the container (and `buffer.length` is set to `size`)
@@ -64,6 +124,18 @@ Resizes the container (and `buffer.length` is set to `size`)
 `void blox_reserve(TYPE, buffer, size)`
 
 Reserves `size` elements (buffer size remains unchanged)
+
+<br>
+
+`void blox_shrink(TYPE, buffer)`
+
+Resizes the container to zero elements
+
+<br>
+
+`void blox_shrink_by(TYPE, buffer, amount)`
+
+Shrinks the container by `amount` elements
 
 <br>
 
@@ -100,84 +172,6 @@ Construct a new blox containing a copy of `array`
 `blox blox_from_string(TYPE, string)`
 
 Construct a new blox from a zero-terminated `string` of `TYPE`
-
-<br>
-
-`void blox_shrink_by(TYPE, buffer, amount)`
-
-Shrinks the container by `amount` elements
-
-<br>
-
-`int blox_compare(TYPE, left, right)`
-
-Compares two containers (first compares lengths; if equal, a bit-by-bit comparison of the two is made)
-
-<br>
-
-`bool blox_equal(TYPE, left, right)`
-
-Returns true if `left` and `right` compare equal
-
-<br>
-
-`bool blox_less(TYPE, left, right)`
-
-Returns true if `left` compares less than `right`
-
-<br>
-
-`bool blox_less_or_equal(TYPE, left, right)`
-
-Returns true if `left` compares less or equal to `right`
-
-<br>
-
-`bool blox_greater(TYPE, left, right)`
-
-Returns true if `left` compares greater than `right`
-
-<br>
-
-`bool blox_greater_or_equal(TYPE, left, right)`
-
-Returns true if `left` compares greater than or equal to `right`
-
-<br>
-
-`void blox_shrink(TYPE, buffer)`
-
-Resizes the container to zero elements
-
-<br>
-
-`void blox_free(buffer)`
-
-Frees a blox container
-
-<br>
-
-`void blox_drop(buffer)`
-
-Zeroes out the container, but doesn't free it (use with care!)
-
-<br>
-
-`TYPE* blox_index(TYPE, buffer, index)`
-
-Returns a pointer to the element at `index`
-
-<br>
-
-`TYPE blox_get(TYPE, buffer, index)`
-
-Returns a reference to the element at `index` (not bounds checked!)
-
-<br>
-
-`void blox_set(TYPE, buffer, index, value)`
-
-Sets the element at `index` to `value` (not bounds checked!)
 
 <br>
 
@@ -226,36 +220,6 @@ Inserts `value` at the end of the container
 `void blox_pop(TYPE, buffer)`
 
 Removes the last element, then shrinks the container by one (if possible)
-
-<br>
-
-`TYPE blox_front(TYPE, buffer)`
-
-Returns a reference to the first element in the container
-
-<br>
-
-`TYPE blox_back(TYPE, buffer)`
-
-Returns a reference to the last element in the container
-
-<br>
-
-`TYPE* blox_begin(TYPE, buffer)`
-
-Returns a pointer to the first element in the container
-
-<br>
-
-`TYPE* blox_end(TYPE, buffer)`
-
-Returns a pointer to the unused element immediately following the last element in the container
-
-<br>
-
-`TYPE* blox_top(TYPE, buffer)`
-
-Returns a pointer to the last element in the container
 
 <br>
 
@@ -348,4 +312,41 @@ Sort using `compare`, which should take two arguments of type `TYPE*`
 Binary search using `compare`, which should take two arguments of type `TYPE*`
 
 <br>
+
+`int blox_compare(TYPE, left, right)`
+
+Compares two containers (first compares lengths; if equal, a bit-by-bit comparison of the two is made)
+
+<br>
+
+`bool blox_equal(TYPE, left, right)`
+
+Returns true if `left` and `right` compare equal
+
+<br>
+
+`bool blox_less(TYPE, left, right)`
+
+Returns true if `left` compares less than `right`
+
+<br>
+
+`bool blox_less_or_equal(TYPE, left, right)`
+
+Returns true if `left` compares less or equal to `right`
+
+<br>
+
+`bool blox_greater(TYPE, left, right)`
+
+Returns true if `left` compares greater than `right`
+
+<br>
+
+`bool blox_greater_or_equal(TYPE, left, right)`
+
+Returns true if `left` compares greater than or equal to `right`
+
+<br>
+
 
