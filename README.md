@@ -1,5 +1,7 @@
 # blox
+
 Simple array library for C
+
 
 ```
 typedef struct
@@ -29,18 +31,6 @@ Returns the number of elements reserved by the container (same as `buffer.capaci
 
 <br>
 
-`bool blox_empty(buffer)`
-
-Returns `true` if the blox is empty (`buffer.length == 0`)
-
-<br>
-
-`blox blox_nil(void)`
-
-Returns a nil blox
-
-<br>
-
 `blox blox_create(TYPE)`
 
 Returns a blox with zero elements
@@ -59,6 +49,30 @@ Returns a blox with `length` elements reserved (nominal size of container will b
 
 <br>
 
+`blox blox_nil(void)`
+
+Returns a nil blox
+
+<br>
+
+`void blox_resize(TYPE, buffer, size)`
+
+Resizes the container (and `buffer.length` is set to `size`)
+
+<br>
+
+`void blox_reserve(TYPE, buffer, size)`
+
+Reserves `size` elements (buffer size remains unchanged)
+
+<br>
+
+`bool blox_empty(buffer)`
+
+Returns `true` if the blox is empty (`buffer.length == 0`)
+
+<br>
+
 `blox blox_use(array, length)`
 
 Use `array` as if it were a normal blox object (note: typically used in conjunction with `blox_drop` rather than `blox_free`)
@@ -71,15 +85,15 @@ Use `array` as if it were a normal blox object (note: typically used in conjunct
 
 <br>
 
-`blox blox_from_array(TYPE, array, length)`
-
-Construct a new blox containing a copy of `array`
-
-<br>
-
 `blox blox_use_string(TYPE, string)`
 
 Use a zero-terminated `string` of `TYPE` as if it were a normal blox object (note: typically used in conjunction with `blox_drop` rather than `blox_free`)
+
+<br>
+
+`blox blox_from_array(TYPE, array, length)`
+
+Construct a new blox containing a copy of `array`
 
 <br>
 
@@ -89,21 +103,9 @@ Construct a new blox from a zero-terminated `string` of `TYPE`
 
 <br>
 
-`void blox_resize(TYPE, buffer, size)`
-
-Resizes the container
-
-<br>
-
 `void blox_shrink_by(TYPE, buffer, amount)`
 
 Shrinks the container by `amount` elements
-
-<br>
-
-`void blox_reserve(TYPE, buffer, size)`
-
-Reserves `size` elements (buffer size is unchanged)
 
 <br>
 

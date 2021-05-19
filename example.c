@@ -19,9 +19,9 @@ info make_info(const char* tag)
  return fyi;
 }
 
-int compare_info(info* lhs, info* rhs)
+void free_info(info* my)
 {
- return strcmp(blox_data(char, lhs->tag), blox_data(char, rhs->tag));
+ blox_free(my->tag);
 }
 
 void print_info(info* my)
@@ -29,9 +29,9 @@ void print_info(info* my)
  printf("TAG: %s\n", blox_begin(char, my->tag));
 }
 
-void free_info(info* my)
+int compare_info(info* lhs, info* rhs)
 {
- blox_free(my->tag);
+ return strcmp(blox_data(char, lhs->tag), blox_data(char, rhs->tag));
 }
 
 void reverse_info(info* my)

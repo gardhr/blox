@@ -397,9 +397,9 @@ typedef int (*blox_comparison)(const void*, const void*);
 
 int blox_compare_(void* lhs, size_t lmx, void* rhs, size_t rmx, size_t width)
 {
- if(lmx != rmx)
-  return lmx < rmx ? -1 : 1;
- return memcmp(lhs, rhs, lmx * width);
+// if(lmx != rmx)
+//  return lmx < rmx ? -1 : 1;
+ return memcmp(lhs, rhs, (lmx < rmx ? lmx, rmx) * width);
 }
 
 #define blox_compare(TYPE, lbx, rbx)\
