@@ -186,6 +186,12 @@ Zeroes out all elements from index `start` up to (but excluding) `end` (the cont
 
 <br>
 
+`void blox_clear_end(TYPE, buffer, start)`
+
+Zeroes out all elements from index `start` up to the last element (the container is ***not*** resized)
+
+<br>
+
 `void blox_clear(TYPE, buffer)`
 
 Zeroes out all elements (the container is ***not*** resized)
