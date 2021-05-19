@@ -259,9 +259,6 @@ blox blox_use_string_(size_t width, const void* address)
   blox_set(TYPE, (buffer), 0, value);\
  }\
  while(0)
- 
-//blox_unshift_by 
-// blox_rend: blox_bottom
 
 #define blox_append(TYPE, buffer, other)\
  do\
@@ -397,9 +394,16 @@ typedef int (*blox_comparison)(const void*, const void*);
 #define blox_sort(TYPE, buffer, comparison)\
  qsort((buffer).data, (buffer).length, sizeof(TYPE), (blox_comparison)comparison)
 
+/*
+ TODO: blox_find
+*/
+
 #define blox_search(TYPE, buffer, key, comparison)\
  ((TYPE*)bsearch(&key, (buffer).data, (buffer).length, sizeof(TYPE), (blox_comparison)comparison))
 
+/*
+ FIXME: The logic behind the comparison is not entirely rigorous
+*/
 int blox_compare_(void* lhs, size_t lmx, void* rhs, size_t rmx, size_t width)
 {
  if(lmx != rmx)
