@@ -87,7 +87,7 @@ blox blox_use_(const void* address, size_t length)
  blox_use(array, length)
 
 #define blox_from_array(TYPE, array, length)\
- blox_clone(TYPE, blox_use(TYPE, array, length))
+ blox_clone(TYPE, blox_use_array(TYPE, array, length))
 
 blox blox_use_string_(size_t width, const void* address)
 {
@@ -260,6 +260,17 @@ blox blox_use_string_(size_t width, const void* address)
  }\
  while(0)
 
+#define blox_unshift_by(TYPE, buffer, amount)\
+ do\
+ {\
+  size_t length = (buffer).length;\
+  blox_resize(TYPE, (buffer), length + amount);\
+  TYPE* begin = blox_begin(TYPE, buffer);\
+  memmove(begin + amount, begin, length * sizeof(TYPE));\
+  blox_clear_range(TYPE, (buffer), 0, amount);\
+ }\
+ while(0)
+
 #define blox_append(TYPE, buffer, other)\
  do\
  {\
@@ -408,7 +419,7 @@ int blox_compare_(void* lhs, size_t lmx, void* rhs, size_t rmx, size_t width)
 {
  if(lmx != rmx)
   return lmx < rmx ? -1 : 1;
- return memcmp(lhs, rhs, (lmx < rmx ? lmx, rmx) * width);
+ return memcmp(lhs, rhs, lmx * width);
 }
 
 #define blox_compare(TYPE, lbx, rbx)\
