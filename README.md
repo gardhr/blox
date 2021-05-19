@@ -90,15 +90,15 @@ Returns a pointer to the first element in the container
 
 <br>
 
-`TYPE* blox_end(TYPE, buffer)`
-
-Returns a pointer to the unused element immediately following the last element in the container
-
-<br>
-
 `TYPE* blox_top(TYPE, buffer)`
 
 Returns a pointer to the last element in the container
+
+<br>
+
+`TYPE* blox_end(TYPE, buffer)`
+
+Returns a pointer to the unused element *immediately following* the last element in the container
 
 <br>
 
