@@ -67,12 +67,12 @@ int main(int argc, char** argv)
  blox_for_each(info, stuff, free_info);
  blox_free(stuff);
  
- 
  int arr[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
  blox cpy = blox_from_array(int, arr, sizeof(arr) / sizeof(int));
  blox_for_each(int, cpy, print_int);
  blox_unshift_by(int, cpy, 4); 
  blox_for_each(int, cpy, print_int);
+ blox_free(cpy);
  return 0;
 }
 
