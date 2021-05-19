@@ -41,7 +41,7 @@ void reverse_info(info* my)
 
 void print_int(int* ptr)
 {
- printf("INT: %d\n", *ptr);
+ printf("%d, ", *ptr);
 }
 
 int main(int argc, char** argv)
@@ -69,9 +69,18 @@ int main(int argc, char** argv)
  
  int arr[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
  blox cpy = blox_from_array(int, arr, sizeof(arr) / sizeof(int));
+ 
+ puts("\nBefore blox_unshift_by:"); 
  blox_for_each(int, cpy, print_int);
+ puts("");
+ 
  blox_unshift_by(int, cpy, 4); 
+ 
+ puts("\nAfter blox_unshift_by(int, cpy, 4):"); 
+ 
  blox_for_each(int, cpy, print_int);
+ puts(""); 
+ 
  blox_free(cpy);
  return 0;
 }
