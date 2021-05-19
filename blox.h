@@ -220,6 +220,8 @@ blox blox_use_string_(size_t width, const void* address)
 
 #define blox_top(TYPE, buffer) blox_index(TYPE, buffer, blox__safe_previous(buffer))
 
+#define blox_bottom(TYPE, buffer) blox_index(TYPE, buffer, buffer.length ? -1 : 0)
+
 #define blox_shrink_by(TYPE, buffer, amount)\
  do\
  {\
@@ -257,6 +259,9 @@ blox blox_use_string_(size_t width, const void* address)
   blox_set(TYPE, (buffer), 0, value);\
  }\
  while(0)
+ 
+//blox_unshift_by 
+// blox_rend: blox_bottom
 
 #define blox_append(TYPE, buffer, other)\
  do\
