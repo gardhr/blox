@@ -147,14 +147,10 @@ blox blox_use_string_(size_t width, const void* address)
  while(0)
 
 #define blox_clear_end(TYPE, buffer, start)\
- blox_clear_range(TYPE, buffer, start, buffer.length)
+ blox_clear_range(TYPE, buffer, start, (buffer).length)
 
 #define blox_clear(TYPE, buffer)\
- do\
- {\
-  blox_clear_range(TYPE, buffer, 0, (buffer).length);\
- }\
- while(0)
+ blox_clear_range(TYPE, buffer, 0, (buffer).length)
 
 /*
 #define blox_erase_range(TYPE, buffer, start, end)\
