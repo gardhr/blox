@@ -71,7 +71,7 @@ blox blox_use_(const void* data, size_t length) {
   return buffer;
 }
 
-#define blox__safe_subtract(a, b) (b <= a ? 0 : b - a)
+#define blox__safe_subtract(a, b) (a < b ? 0 : a - b)
 
 #define blox_use(array, length) blox_use_(array, length)
 
