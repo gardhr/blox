@@ -38,7 +38,7 @@ Returns a nil blox
 
 `void blox_free(buffer)`
 
-Frees a blox container
+Frees a blox container (don't forget!)
 
 <br>
 
