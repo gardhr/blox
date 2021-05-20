@@ -68,19 +68,55 @@ Returns a blox with `length` elements reserved; nominal size of container will b
 
 `blox blox_from_array(TYPE, array, length)`
 
-Construct a new blox containing a copy of `array` (must be freed with `blox_free`)
+Constructs a new blox containing a copy of `array` (must be freed with `blox_free`)
 
 <br>
 
 `blox blox_from_string(TYPE, string)`
 
-Construct a new blox from a zero-terminated `string` of `TYPE` (must be freed with `blox_free`)
+Constructs a new blox from a zero-terminated `string` of `TYPE` (must be freed with `blox_free`)
 
 <br>
 
-`blox blox_from_sequence(TYPE, start, end)` (must be freed with `blox_free`)
+`blox blox_from_sequence(TYPE, start, end)`
 
-Construct a new blox object by copying pointer ranges `start` to `end`
+Constructs a new blox object by copying pointer ranges `start` to `end` (must be freed with `blox_free`)
+
+<br>
+
+`blox blox_slice(TYPE, other, start, amount)`
+
+Constructs a new blox object by copying `amount` elements of blox `other` starting from index `start` (must be freed with `blox_free`)
+
+<br>
+
+`blox blox_slice_range(TYPE, other, start, end)`
+
+Constructs a new blox object by copying from index `start` to `end` of blox `other` (must be freed with `blox_free`)
+
+<br>
+
+`blox blox_slice_range(TYPE, other, start, amount)`
+
+Constructs a new blox object by copying `amount` elements of blox `other` starting at index `start` (must be freed with `blox_free`)
+
+<br>
+
+`blox blox_slice_end(TYPE, other, start)`
+
+Constructs a new blox object by copying the last elements of blox `other` starting at index `start` (must be freed with `blox_free`)
+
+<br>
+
+`blox blox_slice_first(TYPE, other, amount)`
+
+Constructs a new blox object by copying the first `amount` elements of blox `other` (must be freed with `blox_free`)
+
+<br>
+
+`blox blox_slice_last(TYPE, other, amount)`
+
+Constructs a new blox object by copying the last `amount` elements of blox `other` (must be freed with `blox_free`)
 
 <br>
 

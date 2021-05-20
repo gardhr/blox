@@ -126,6 +126,23 @@ blox blox_use_string_(size_t width, const void* data) {
 
 #define blox_create(TYPE) blox_make(TYPE, 0)
 
+#define blox_slice(TYPE, buffer, start, amount) \
+  blox_clone(TYPE, blox_use_view(TYPE, buffer, start, amount))
+
+#define blox_slice_range(TYPE, buffer, start, end) \
+  blox_slice(TYPE, buffer, start, blox__safe_subtract(end, start))
+
+#define blox_slice_end(TYPE, buffer, start) \
+ blox_slice_range(TYPE, buffer, start, (buffer).length))
+
+#define blox_slice_first(TYPE, buffer, amount) \
+  blox_slice(TYPE, buffer, 0,                  \
+             amount < (buffer).length ? amount : (buffer).length)
+
+#define blox_slice_last(TYPE, buffer, amount)                            \
+  blox_slice(TYPE, buffer, blox__safe_subtract((buffer).length, amount), \
+             amount < (buffer).length ? amount : 0)
+
 #define blox_shrink(TYPE, buffer) blox_resize(TYPE, buffer, 0)
 
 #define blox_drop(buffer)                    \
@@ -428,3 +445,4 @@ int blox_compare_(void* lhs, size_t lmx, void* rhs, size_t rmx, size_t width) {
   (blox_compare(TYPE, lbx, rbx) >= 0)
 
 #endif  // BLOX_H_INCLUDED
+

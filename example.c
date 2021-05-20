@@ -100,6 +100,12 @@ int main(int argc, char** argv) {
   blox_for_each(int, cpy, print_int);
   puts("");
   
+  blox slc = blox_slice_first(int, cpy, 4);
+  puts("\nAfter making slice of first 4 elements:");
+
+  blox_for_each(int, slc, print_int);
+  puts("");  
+  
   blox_free(cpy);
   return 0;
 }
