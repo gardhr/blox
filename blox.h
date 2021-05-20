@@ -77,7 +77,8 @@ blox blox_use_(const void* address, size_t length) {
 
 #define blox_use_sequence(TYPE, start, end) blox_use(start, end - start)
 
-#include <stdio.h>
+#define blox__safe_last(buffer) \
+  ((buffer).length ? ((buffer).length - 1) : (buffer).length)
 
 blox blox_use_string_(size_t width, const void* address) {
   typedef unsigned char byte;
@@ -123,27 +124,46 @@ blox blox_use_string_(size_t width, const void* address) {
     (buffer).length = (buffer).capacity = 0; \
   } while (0)
 
+/*
 #define blox_clear_range(TYPE, buffer, start, end)                       \
-  do {                                                                   \
-    size_t begin = (start);                                              \
-    size_t length = (end)-begin;                                         \
-    memset(blox_index(TYPE, (buffer), begin), 0, length * sizeof(TYPE)); \
+  do {       \
+    TYPE* cursor = blox_index(TYPE, (buffer), (start));\
+    if(end < start)\
+     break;\
+    size_t count = (end - start) - 1;\
+    if((cursor + count) >= blox_end(TYPE, (buffer)))\
+     break;\
+    memset(cursor, 0, count * sizeof(TYPE)); \
+  } while (0)
+*/
+
+#define blox_clear_at(TYPE, buffer, start, count)       \
+  do {                                                  \
+    TYPE* cursor = blox_index(TYPE, (buffer), (start)); \
+    if ((cursor + count) >= blox_end(TYPE, (buffer)))   \
+      break;                                            \
+    memset(cursor, 0, count * sizeof(TYPE));            \
   } while (0)
 
+#define blox_clear_range(TYPE, buffer, start, end) \
+  blox_clear_at(TYPE, buffer, start, end <= start ? 0 : (end - start) - 1)
+
 #define blox_clear_end(TYPE, buffer, start) \
-  blox_clear_range(TYPE, buffer, start, (buffer).length)
+  blox_clear_at(TYPE, buffer, start,        \
+                (buffer).length < start ? 0 : (buffer).length - start)
 
-#define blox_clear(TYPE, buffer) \
-  blox_clear_range(TYPE, buffer, 0, (buffer).length)
+#define blox_clear(TYPE, buffer) blox_clear_end(TYPE, buffer, 0)
 
-#define blox_erase_range(TYPE, buffer, start, end)                  \
+#define blox_erase_at(TYPE, buffer, start, count)                   \
   do {                                                              \
     TYPE* begin = blox_index(TYPE, (buffer), start);                \
-    size_t count = end - start;                                     \
     size_t length = (buffer).length;                                \
     memmove(begin, begin + count, sizeof(TYPE) * (length - count)); \
     blox_shrink_by(TYPE, (buffer), count);                          \
   } while (0)
+
+#define blox_erase_range(TYPE, buffer, start, end) \
+  blox_erase_at(TYPE, buffer, start, end <= start ? 0 : (end - start) - 1)
 
 #define blox_insert(TYPE, buffer, index, value) \
   do {                                          \
@@ -187,9 +207,6 @@ blox blox_use_string_(size_t width, const void* address) {
     (buffer).length = saved;             \
   } while (0)
 
-#define blox__safe_previous(buffer) \
-  ((buffer).length ? ((buffer).length - 1) : (buffer).length)
-
 #define blox_stuff(TYPE, buffer) \
   blox_resize(TYPE, buffer, blox_length(buffer) + 1)
 
@@ -197,19 +214,17 @@ blox blox_use_string_(size_t width, const void* address) {
   blox_insert(TYPE, buffer, (buffer).length, value)
 
 #define blox_pop(TYPE, buffer) \
-  blox_resize(TYPE, buffer, blox__safe_previous(buffer))
+  blox_resize(TYPE, buffer, blox__safe_last(buffer))
 
 #define blox_front(TYPE, buffer) blox_get(TYPE, buffer, 0)
 
-#define blox_back(TYPE, buffer) \
-  blox_get(TYPE, buffer, blox__safe_previous(buffer))
+#define blox_back(TYPE, buffer) blox_get(TYPE, buffer, blox__safe_last(buffer))
 
 #define blox_begin(TYPE, buffer) blox_index(TYPE, buffer, 0)
 
 #define blox_end(TYPE, buffer) blox_index(TYPE, buffer, (buffer).length)
 
-#define blox_top(TYPE, buffer) \
-  blox_index(TYPE, buffer, blox__safe_previous(buffer))
+#define blox_top(TYPE, buffer) blox_index(TYPE, buffer, blox__safe_last(buffer))
 
 #define blox_bottom(TYPE, buffer) \
   blox_index(TYPE, buffer, buffer.length ? -1 : 0)
@@ -251,7 +266,7 @@ blox blox_use_string_(size_t width, const void* address) {
     blox_resize(TYPE, (buffer), length + amount);          \
     TYPE* begin = blox_begin(TYPE, buffer);                \
     memmove(begin + amount, begin, length * sizeof(TYPE)); \
-    blox_clear_range(TYPE, (buffer), 0, amount);           \
+    blox_clear_at(TYPE, (buffer), 0, amount);              \
   } while (0)
 
 #define blox_append(TYPE, buffer, other)                     \

@@ -82,8 +82,8 @@ int main(int argc, char** argv) {
   blox_for_each(int, cpy, print_int);
   puts("");
 
-  blox_erase_range(int, cpy, 5, 7);
-  puts("\nAfter erase from the 5th index up to (but excluding) 7th:");
+  blox_erase_at(int, cpy, 5, 3);
+  puts("\nAfter erase 3 elements, starting from the 5th index:");
 
   blox_for_each(int, cpy, print_int);
   puts("");
