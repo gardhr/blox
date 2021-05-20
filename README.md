@@ -182,7 +182,7 @@ Resizes the container (and `buffer.length` is set to `size`)
 
 `void blox_reserve(TYPE, buffer, size)`
 
-Reserves `size` elements (buffer size remains unchanged)
+Reserves `size` elements (`buffer.length` remains unchanged)
 
 <br>
 
