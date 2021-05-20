@@ -71,14 +71,23 @@ blox blox_use_(const void* address, size_t length) {
   return buffer;
 }
 
+#define blox__safe_subtract(a, b)\
+(b <= a ? 0 : b - a)
+
 #define blox_use(array, length) blox_use_(array, length)
 
 #define blox_use_array(TYPE, array, length) blox_use(array, length)
 
 #define blox_use_sequence(TYPE, start, end) blox_use(start, end - start)
 
+#define blox_use_view(TYPE, other, start, length)\
+ blox_use(blox_index(TYPE, other, start), length)
+
+#define blox_use_window(TYPE, other, start, end)\
+ blox_use_view(other, start, blox__safe_subtract(end, start))
+
 #define blox__safe_last(buffer) \
-  ((buffer).length ? ((buffer).length - 1) : (buffer).length)
+  blox__safe_subtract((buffer).length, 1)
 
 blox blox_use_string_(size_t width, const void* address) {
   typedef unsigned char byte;
@@ -133,11 +142,11 @@ blox blox_use_string_(size_t width, const void* address) {
   } while (0)
 
 #define blox_clear_range(TYPE, buffer, start, end) \
-  blox_clear_at(TYPE, buffer, start, end <= start ? 0 : (end - start) - 1)
+  blox_clear_at(TYPE, buffer, start, blox__safe_subtract(end, start))
 
 #define blox_clear_end(TYPE, buffer, start) \
   blox_clear_at(TYPE, buffer, start,        \
-                (buffer).length < start ? 0 : (buffer).length - start)
+                blox__safe_subtract((buffer).length, start))
 
 #define blox_clear(TYPE, buffer) blox_clear_end(TYPE, buffer, 0)
 
@@ -150,7 +159,7 @@ blox blox_use_string_(size_t width, const void* address) {
   } while (0)
 
 #define blox_erase_range(TYPE, buffer, start, end) \
-  blox_erase_at(TYPE, buffer, start, end <= start ? 0 : (end - start) - 1)
+  blox_erase_at(TYPE, buffer, start, blox__safe_subtract(end, start))
 
 #define blox_insert(TYPE, buffer, index, value) \
   do {                                          \
