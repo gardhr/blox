@@ -184,7 +184,7 @@ blox blox_use_string_(size_t width, const void* address)
   size_t capacity = (buffer).capacity;\
   if(request >= capacity)\
   {\
-   if(!capacity)\
+   if(!capacity) \
     ++capacity;\
    while(capacity <= request)\
     capacity <<= 1;\
