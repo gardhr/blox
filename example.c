@@ -94,6 +94,12 @@ int main(int argc, char** argv) {
   blox_for_each(int, cpy, print_int);
   puts("");
   
+  blox_splice_string(int, cpy, 2, arr);
+  puts("\nAfter splicing array into copy at the 2nd element:");
+
+  blox_for_each(int, cpy, print_int);
+  puts("");
+  
   blox_free(cpy);
   return 0;
 }

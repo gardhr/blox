@@ -300,6 +300,30 @@ Reverses the elements in `buffer` (inplace)
 
 <br>
 
+`void blox_splice(TYPE, buffer, index, other)`
+
+Splices blox `other` to `buffer` at `index`
+
+<br>
+
+`void blox_splice_sequence(TYPE, buffer, index, start, end)`
+
+Splices the sequence from pointer `start` to `end` to the container `buffer` at `index`
+
+<br>
+
+`void blox_splice_string(TYPE, buffer, index, array)`
+
+Splices a zero-terminated `array` to the container `buffer` at `index`
+
+<br>
+
+`void blox_splice_array(TYPE, buffer, index, array, length)`
+
+Splices `length` elements of `array` to the container `buffer` at `index`
+
+<br>
+
 `void blox_append(TYPE, buffer, other)`
 
 Appends the blox `other` to `buffer`

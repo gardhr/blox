@@ -151,8 +151,7 @@ blox blox_use_string_(size_t width, const void* data) {
 
 #define blox_clear(TYPE, buffer) blox_clear_end(TYPE, buffer, 0)
 
-#define blox_erase(TYPE, buffer, index) \
-  blox_erase_at(TYPE, buffer, index, 1)
+#define blox_erase(TYPE, buffer, index) blox_erase_at(TYPE, buffer, index, 1)
 
 #define blox_erase_at(TYPE, buffer, start, amount)                    \
   do {                                                                \
@@ -287,15 +286,26 @@ blox blox_use_string_(size_t width, const void* data) {
 #define blox_append_string(TYPE, buffer, array) \
   blox_append(TYPE, buffer, blox_use_string(TYPE, array))
 
-#define blox_prepend(TYPE, buffer, other)                           \
-  do {                                                              \
-    size_t length = (buffer).length;                                \
-    size_t additional = (other).length;                             \
-    blox_resize(TYPE, (buffer), length + additional);               \
-    TYPE* begin = blox_begin(TYPE, buffer);                         \
-    memmove(begin + additional, begin, length * sizeof(TYPE));      \
-    memcpy((buffer).data, (other).data, additional * sizeof(TYPE)); \
+#define blox_splice(TYPE, buffer, index, other)                          \
+  do {                                                                   \
+    size_t length = (buffer).length;                                     \
+    size_t additional = (other).length;                                  \
+    blox_resize(TYPE, (buffer), length + additional);                    \
+    TYPE* begin = blox_index(TYPE, buffer, index);                       \
+    memmove(begin + additional, begin, (length - index) * sizeof(TYPE)); \
+    memcpy(begin, (other).data, additional * sizeof(TYPE));              \
   } while (0)
+
+#define blox_splice_sequence(TYPE, buffer, index, start, end)                          \
+ blox_splice(TYPE, buffer, index, blox_use_sequence(TYPE, start, end))
+ 
+#define blox_splice_array(TYPE, buffer, index, array, length)                          \
+ blox_splice(TYPE, buffer, index, blox_use_array(TYPE, array, length))
+
+#define blox_splice_string(TYPE, buffer, index, array)                          \
+ blox_splice(TYPE, buffer, index, blox_use_string(TYPE, array))
+
+#define blox_prepend(TYPE, buffer, other) blox_splice(TYPE, buffer, 0, other)
 
 #define blox_prepend_sequence(TYPE, buffer, start, end) \
   blox_prepend(TYPE, buffer, blox_use_sequence(TYPE, start, end))
