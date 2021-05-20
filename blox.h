@@ -182,9 +182,12 @@ blox blox_use_string_(size_t width, const void* address)
  {\
   size_t request = (size);\
   size_t capacity = (buffer).capacity;\
+  size_t length = (buffer).length;\
+  if(request == length)\
+   break;\
   if(request >= capacity)\
   {\
-   if(!capacity) \
+   if(!capacity)\
     ++capacity;\
    while(capacity <= request)\
     capacity <<= 1;\
@@ -194,7 +197,6 @@ blox blox_use_string_(size_t width, const void* address)
    (buffer).data = chunk;\
    (buffer).capacity = capacity;\
   }\
-  size_t length = (buffer).length;\
   if(request > length)\
    memset(blox_index(TYPE, buffer, length), 0, ((request - length) + 1) * sizeof(TYPE));\
   else\
