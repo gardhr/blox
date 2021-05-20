@@ -104,7 +104,7 @@ int main(int argc, char** argv) {
   puts("\nAfter making slice of first 4 elements:");
 
   blox_for_each(int, slc, print_int);
-  puts("");  
+  puts(""); 
   
   blox_free(slc);
   blox_free(cpy);

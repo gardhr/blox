@@ -375,6 +375,9 @@ blox blox_clone_(size_t width, const void* data, size_t length) {
     blox_drop(buffer);    \
   } while (0)
 
+#define blox_offset(TYPE, buffer, pointer) \
+  blox__safe_subtract((TYPE*)pointer, (TYPE*)(buffer).data)
+
 #define blox_for_each(TYPE, buffer, action)                                   \
   do {                                                                        \
     typedef void (*callback)(const void*, size_t);                            \
@@ -445,4 +448,3 @@ int blox_compare_(void* lhs, size_t lmx, void* rhs, size_t rmx, size_t width) {
   (blox_compare(TYPE, lbx, rbx) >= 0)
 
 #endif  // BLOX_H_INCLUDED
-
