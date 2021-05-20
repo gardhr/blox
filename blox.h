@@ -124,7 +124,7 @@ blox blox_use_string_(size_t width, const void* address) {
 #define blox_clear_range(TYPE, buffer, start, end)                       \
   do {                                                                   \
     size_t begin = (start);                                              \
-    size_t length = (end)-begin;                                         \
+    size_t length = (end) - begin;                                         \
     memset(blox_index(TYPE, (buffer), begin), 0, length * sizeof(TYPE)); \
   } while (0)
 
@@ -135,13 +135,11 @@ blox blox_use_string_(size_t width, const void* address) {
   blox_clear_range(TYPE, buffer, 0, (buffer).length)
 
 #define blox_erase_range(TYPE, buffer, start, end) \
-  do {                                            \                                    \
-    TYPE* begin = blox_begin(TYPE, (buffer));     \
-    TYPE* cursor = begin + start;                 \
-    if (cursor > blox_end(TYPE, (buffer)))        \
-      break;                                      \
+  do {                                            \
+    TYPE* begin = blox_index(TYPE, (buffer), start);                 \
     size_t count = end - start;                   \
-    memmove(begin, cursor, sizeof(TYPE) * count); \
+    size_t length = (buffer).length;                   \
+    memmove(begin, begin + count, sizeof(TYPE) * (length - count)); \
     blox_shrink_by(TYPE, (buffer), count);        \
   } while (0)
 

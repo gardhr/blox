@@ -63,7 +63,7 @@ int main(int argc, char** argv) {
   blox_free(stuff);
 
   int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0};
-  blox cpy = blox_from_string(int, arr);
+  blox cpy = blox_from_array(int, arr, 10);//blox_from_string(int, arr);
 
   puts("\nBefore blox_unshift_by:");
   blox_for_each(int, cpy, print_int);
@@ -82,6 +82,12 @@ int main(int argc, char** argv) {
   blox_for_each(int, cpy, print_int);
   puts("");
 
+  blox_erase_range(int, cpy, 5, 7);
+  puts("\nAfter erase from the 5th index up to (but excluding) 7th:");
+
+  blox_for_each(int, cpy, print_int);
+  puts("");
+  
   blox_free(cpy);
   return 0;
 }
