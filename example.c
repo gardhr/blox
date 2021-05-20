@@ -83,7 +83,7 @@ int main(int argc, char** argv) {
   puts("");
 
   blox_erase_at(int, cpy, 5, 3);
-  puts("\nAfter erase 3 elements, starting from the 5th index:");
+  puts("\nAfter erasing 3 elements, starting from the 5th index:");
 
   blox_for_each(int, cpy, print_int);
   puts("");
