@@ -378,15 +378,21 @@ Sort using `compare`, which should take two arguments of type `TYPE*`
 
 <br>
 
-`void blox_search(TYPE, buffer, key, compare)`
+`TYPE* blox_search(TYPE, buffer, key, compare)`
 
 Binary search using `compare`, which should take two arguments of type `TYPE*`
 
 <br>
 
+`TYPE* blox_find(TYPE, buffer, key, compare)`
+
+Sequential search using `compare`, which should take two arguments of type `TYPE*`
+
+<br>
+
 `int blox_compare(TYPE, left, right)`
 
-Compares two containers (first compares lengths; if equal, a bit-by-bit comparison of the two is made)
+Compares two blox containers (first compares lengths; if equal, a bit-by-bit comparison of the two is made)
 
 <br>
 
