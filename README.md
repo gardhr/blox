@@ -86,37 +86,37 @@ Construct a new blox object by copying pointer ranges `start` to `end`
 
 `blox blox_use(array, length)`
 
-Use `array` as if it were a normal blox object (note: typically used in conjunction with `blox_drop` rather than `blox_free`)
+Use `array` as if it were a normal blox object (note: use in conjunction with `blox_drop` rather than `blox_free`)
 
 <br>
 
 `blox blox_use_array(TYPE, array, length)`
 
-Use `array` as if it were a normal blox object (note: typically used in conjunction with `blox_drop` rather than `blox_free`)
+Use `array` as if it were a normal blox object (note: use in conjunction with `blox_drop` rather than `blox_free`)
 
 <br>
 
 `blox blox_use_string(TYPE, string)`
 
-Use a zero-terminated `string` of `TYPE` as if it were a normal blox object (note: typically used in conjunction with `blox_drop` rather than `blox_free`)
+Use a zero-terminated `string` of `TYPE` as if it were a normal blox object (note: use in conjunction with `blox_drop` rather than `blox_free`)
 
 <br>
 
 `blox blox_use_sequence(TYPE, start, end)`
 
-Use a sequence (from pointer `start` to `end`) as if it were a normal blox object
+Use a sequence (from pointer `start` to `end`) as if it were a normal blox object (note: use in conjunction with `blox_drop` rather than `blox_free`)
 
 <br>
 
 `blox blox_use_window(TYPE, other, start, end)`
 
-Use a subsequence (from index `start` to `end`) of blox object `other` as if it were itself a normal blox object
+Use a subsequence (from index `start` to `end`) of blox object `other` as if it were itself a normal blox object (note: use in conjunction with `blox_drop` rather than `blox_free`)
 
 <br>
 
 `blox blox_use_view(TYPE, other, start, amount)`
 
-Use `amount` elements (starting from index `start`) of blox object `other` as if it were itself a normal blox object
+Use `amount` elements (starting from index `start`) of blox object `other` as if it were itself a normal blox object (note: use in conjunction with `blox_drop` rather than `blox_free`)
 
 <br>
 
