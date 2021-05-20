@@ -106,6 +106,7 @@ int main(int argc, char** argv) {
   blox_for_each(int, slc, print_int);
   puts("");  
   
+  blox_free(slc);
   blox_free(cpy);
   return 0;
 }
