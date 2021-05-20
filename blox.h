@@ -296,14 +296,14 @@ blox blox_use_string_(size_t width, const void* data) {
     memcpy(begin, (other).data, additional * sizeof(TYPE));              \
   } while (0)
 
-#define blox_splice_sequence(TYPE, buffer, index, start, end)                          \
- blox_splice(TYPE, buffer, index, blox_use_sequence(TYPE, start, end))
- 
-#define blox_splice_array(TYPE, buffer, index, array, length)                          \
- blox_splice(TYPE, buffer, index, blox_use_array(TYPE, array, length))
+#define blox_splice_sequence(TYPE, buffer, index, start, end) \
+  blox_splice(TYPE, buffer, index, blox_use_sequence(TYPE, start, end))
 
-#define blox_splice_string(TYPE, buffer, index, array)                          \
- blox_splice(TYPE, buffer, index, blox_use_string(TYPE, array))
+#define blox_splice_array(TYPE, buffer, index, array, length) \
+  blox_splice(TYPE, buffer, index, blox_use_array(TYPE, array, length))
+
+#define blox_splice_string(TYPE, buffer, index, array) \
+  blox_splice(TYPE, buffer, index, blox_use_string(TYPE, array))
 
 #define blox_prepend(TYPE, buffer, other) blox_splice(TYPE, buffer, 0, other)
 
