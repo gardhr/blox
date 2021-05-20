@@ -96,12 +96,6 @@ Constructs a new blox object by copying from index `start` to `end` of blox `oth
 
 <br>
 
-`blox blox_slice_range(TYPE, other, start, amount)`
-
-Constructs a new blox object by copying `amount` elements of blox `other` starting at index `start` (must be freed with `blox_free`)
-
-<br>
-
 `blox blox_slice_end(TYPE, other, start)`
 
 Constructs a new blox object by copying the last elements of blox `other` starting at index `start` (must be freed with `blox_free`)
