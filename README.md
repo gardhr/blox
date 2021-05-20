@@ -108,6 +108,18 @@ Use a sequence (from pointer `start` to `end`) as if it were a normal blox objec
 
 <br>
 
+`blox blox_use_window(TYPE, other, start, end)`
+
+Use a subsequence (from index `start` to `end`) of blox object `other` as if it were itself a normal blox object
+
+<br>
+
+`blox blox_use_view(TYPE, other, start, amount)`
+
+Use `amount` elements (starting from index `start`) of blox object `other` as if it were itself a normal blox object
+
+<br>
+
 `TYPE* blox_index(TYPE, buffer, index)`
 
 Returns a pointer to the element at `index`
