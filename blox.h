@@ -45,14 +45,12 @@ blox blox_nil(void)
 
 #define blox_data(TYPE, buffer) ((TYPE*)(buffer).data)
 
-#define blox_data(TYPE, buffer) ((TYPE*)(buffer).data)
-
 #define blox_index(TYPE, buffer, index) (blox_data(TYPE, buffer) + (index))
 
 #define blox_get(TYPE, buffer, index) (*blox_index(TYPE, buffer, index))
 
 #define blox_set(TYPE, buffer, index, value)\
-(blox_get(TYPE, buffer, index) = (TYPE)(value))
+ (blox_get(TYPE, buffer, index) = (TYPE)(value))
 
 #define blox_length(buffer) (buffer).length
 
@@ -73,7 +71,6 @@ blox blox_make_(size_t width, size_t length, int empty)
 #define blox_make(TYPE, length)\
  blox_make_(sizeof(TYPE), length, 0)
 
-
 blox blox_use_(const void* address, size_t length)
 {
  blox buffer = {(void*)address, length, length};
@@ -86,8 +83,10 @@ blox blox_use_(const void* address, size_t length)
 #define blox_use_array(TYPE, array, length)\
  blox_use(array, length)
 
-#define blox_from_array(TYPE, array, length)\
- blox_clone(TYPE, blox_use_array(TYPE, array, length))
+#define blox_use_sequence(TYPE, start, end)\
+ blox_use(start, end - start)
+
+#include <stdio.h>
 
 blox blox_use_string_(size_t width, const void* address)
 {
@@ -111,7 +110,7 @@ blox blox_use_string_(size_t width, const void* address)
   if(count == 0)
    break;
  }
- size_t length = (current - base) - 1;
+ size_t length = ((current - base) / width) - width;
  blox buffer = {base, length, length};
  return buffer;
 }
@@ -119,8 +118,14 @@ blox blox_use_string_(size_t width, const void* address)
 #define blox_use_string(TYPE, string)\
  blox_use_string_(sizeof(TYPE), string)
 
+#define blox_from_array(TYPE, array, length)\
+ blox_clone(TYPE, blox_use_array(TYPE, array, length))
+
 #define blox_from_string(TYPE, string)\
  blox_clone(TYPE, blox_use_string(TYPE, string))
+
+#define blox_from_sequence(TYPE, start, end)\
+ blox_clone(TYPE, blox_use_sequence(TYPE, start, end))
 
 #define blox_reserved(TYPE, length)\
  blox_make_(sizeof(TYPE), length, 1)
@@ -291,6 +296,15 @@ blox blox_use_string_(size_t width, const void* address)
  }\
  while(0)
 
+#define blox_append_sequence(TYPE, buffer, start, end)\
+ blox_append(TYPE, buffer, blox_use_sequence(TYPE, start, end))
+
+#define blox_append_array(TYPE, buffer, array, length)\
+ blox_append(TYPE, buffer, blox_use_array(TYPE, array, length))
+
+#define blox_append_string(TYPE, buffer, array)\
+ blox_append(TYPE, buffer, blox_use_string(TYPE, array))
+
 #define blox_prepend(TYPE, buffer, other)\
  do\
  {\
@@ -304,36 +318,11 @@ blox blox_use_string_(size_t width, const void* address)
  }\
  while(0)
 
-#define blox_append_sequence(TYPE, buffer, start, end)\
- do\
- {\
-  size_t length = end - start;\
-  size_t index = 0;\
-  while(index != length)\
-   blox_push(TYPE, (buffer), (TYPE)start[index++]);\
- }\
- while(0)
-
-#define blox_append_string(TYPE, buffer, array)\
- do\
- {\
-  size_t index = 0;\
-  while(array[index])\
-   blox_push(TYPE, (buffer), (TYPE)array[index++]);\
- }\
- while(0)
+#define blox_prepend_sequence(TYPE, buffer, start, end)\
+ blox_prepend(TYPE, buffer, blox_use_sequence(TYPE, start, end))
 
 #define blox_prepend_string(TYPE, buffer, array)\
  blox_prepend(TYPE, buffer, blox_use_string(TYPE, array))
-
-#define blox_append_array(TYPE, buffer, array, length)\
- do\
- {\
-  size_t index = 0;\
-  while(index < length)\
-   blox_push(TYPE, (buffer), (TYPE)array[index++]);\
- }\
- while(0)
 
 #define blox_prepend_array(TYPE, buffer, array, length)\
  blox_prepend_array(TYPE, buffer, blox_use_array(TYPE, array, length))

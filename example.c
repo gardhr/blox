@@ -67,8 +67,8 @@ int main(int argc, char** argv)
  blox_for_each(info, stuff, free_info);
  blox_free(stuff);
  
- int arr[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
- blox cpy = blox_from_array(int, arr, sizeof(arr) / sizeof(int));
+ int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0 };
+ blox cpy = blox_from_string(int, arr);
  
  puts("\nBefore blox_unshift_by:"); 
  blox_for_each(int, cpy, print_int);
@@ -81,6 +81,11 @@ int main(int argc, char** argv)
  blox_for_each(int, cpy, print_int);
  puts(""); 
  
+ blox_append_string(int, cpy, arr);  
+ puts("\nAfter append:"); 
+ 
+ blox_for_each(int, cpy, print_int);
+ puts("");  
  blox_free(cpy);
  return 0;
 }
