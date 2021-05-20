@@ -86,8 +86,6 @@ blox blox_use_(const void* address, size_t length)
 #define blox_use_sequence(TYPE, start, end)\
  blox_use(start, end - start)
 
-#include <stdio.h>
-
 blox blox_use_string_(size_t width, const void* address)
 {
  typedef unsigned char byte;
@@ -186,12 +184,10 @@ blox blox_use_string_(size_t width, const void* address)
   size_t capacity = (buffer).capacity;\
   if(request >= capacity)\
   {\
+   if(!capacity)\
+    ++capacity;\
    while(capacity <= request)\
-   {\
-    capacity *= 1.6180339887498948482;\
-    if(capacity < 2)\
-     capacity += 1;\
-   }\
+    capacity <<= 1;\
    void* chunk = realloc((buffer).data, capacity * sizeof(TYPE));\
    if(chunk == NULL)\
     break;\
