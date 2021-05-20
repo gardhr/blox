@@ -109,7 +109,7 @@ blox blox_use_string_(size_t width, const void* address)
    break;
  }
  size_t length = ((current - base) / width) - width;
- blox buffer = {base, length, length};
+ blox buffer = { base, length, length };
  return buffer;
 }
 
@@ -405,6 +405,22 @@ typedef int (*blox_comparison)(const void*, const void*);
 /*
  TODO: blox_find
 */
+
+void* blox_find_(void* key, void* buffer, size_t length, size_t width, blox_comparison comparison)
+{
+ typedef unsigned char byte;
+ byte* current = (byte*)buffer;
+ while(length--)
+ {
+  if(comparison(key, current) == 0)
+   return current;
+  current += width; 
+ } 
+ return NULL;
+}
+
+#define blox_find(TYPE, buffer, key, comparison)\
+ ((TYPE*)blox_find_(&key, (buffer).data, (buffer).length, sizeof(TYPE), (blox_comparison)comparison))
 
 #define blox_search(TYPE, buffer, key, comparison)\
  ((TYPE*)bsearch(&key, (buffer).data, (buffer).length, sizeof(TYPE), (blox_comparison)comparison))

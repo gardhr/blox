@@ -44,6 +44,11 @@ void print_int(int* ptr)
  printf("%d, ", *ptr);
 }
 
+int compare_int(int* lhs, int* rhs)
+{
+ return *lhs - *rhs;
+}
+
 int main(int argc, char** argv)
 {
  blox stuff = {0};
@@ -76,16 +81,17 @@ int main(int argc, char** argv)
  
  blox_unshift_by(int, cpy, 4); 
  
- puts("\nAfter blox_unshift_by(int, cpy, 4):"); 
- 
+ puts("\nAfter blox_unshift_by(int, cpy, 4):");
+
  blox_for_each(int, cpy, print_int);
- puts(""); 
- 
+ puts("");
+
  blox_append_string(int, cpy, arr);  
- puts("\nAfter append:"); 
- 
+ puts("\nAfter append:");
+
  blox_for_each(int, cpy, print_int);
- puts("");  
+ puts("");
+ 
  blox_free(cpy);
  return 0;
 }
