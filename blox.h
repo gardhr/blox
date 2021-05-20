@@ -124,19 +124,6 @@ blox blox_use_string_(size_t width, const void* address) {
     (buffer).length = (buffer).capacity = 0; \
   } while (0)
 
-/*
-#define blox_clear_range(TYPE, buffer, start, end)                       \
-  do {       \
-    TYPE* cursor = blox_index(TYPE, (buffer), (start));\
-    if(end < start)\
-     break;\
-    size_t count = (end - start) - 1;\
-    if((cursor + count) >= blox_end(TYPE, (buffer)))\
-     break;\
-    memset(cursor, 0, count * sizeof(TYPE)); \
-  } while (0)
-*/
-
 #define blox_clear_at(TYPE, buffer, start, count)       \
   do {                                                  \
     TYPE* cursor = blox_index(TYPE, (buffer), (start)); \
