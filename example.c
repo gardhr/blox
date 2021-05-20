@@ -76,8 +76,8 @@ int main(int argc, char** argv) {
   blox_for_each(int, cpy, print_int);
   puts("");
 
-  blox_append_string(int, cpy, arr);
-  puts("\nAfter append:");
+  blox_prepend_string(int, cpy, arr);
+  puts("\nAfter prepend:");
 
   blox_for_each(int, cpy, print_int);
   puts("");
