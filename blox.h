@@ -87,9 +87,9 @@ blox blox_use_(const void* address, size_t length) {
 
 #define blox__safe_last(buffer) blox__safe_subtract((buffer).length, 1)
 
-blox blox_use_string_(size_t width, const void* address) {
+blox blox_use_string_(size_t width, const void* data) {
   typedef unsigned char byte;
-  byte* base = ((byte*)address);
+  byte* base = ((byte*)data);
   byte* current = base;
   for (;;) {
     size_t count = width;
@@ -301,11 +301,10 @@ blox blox_use_string_(size_t width, const void* address) {
 #define blox_prepend_array(TYPE, buffer, array, length) \
   blox_prepend_array(TYPE, buffer, blox_use_array(TYPE, array, length))
 
-blox blox_clone_(blox other, size_t width) {
-  size_t length = other.length;
+blox blox_clone_(size_t width, const void* data, size_t length) {
   size_t size = length * width;
   blox buffer = blox_make(char, size);
-  memcpy(buffer.data, other.data, size);
+  memcpy(buffer.data, data, size);
   buffer.length = buffer.capacity = length;
   return buffer;
 }
@@ -316,7 +315,8 @@ blox blox_clone_(blox other, size_t width) {
     blox_append(TYPE, (buffer), (source)); \
   } while (0)
 
-#define blox_clone(TYPE, buffer) blox_clone_((buffer), sizeof(TYPE))
+#define blox_clone(TYPE, buffer) \
+  blox_clone_(sizeof(TYPE), (buffer).data, (buffer).length)
 
 #define blox_swap(buffer, other) \
   do {                           \
