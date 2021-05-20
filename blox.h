@@ -71,8 +71,7 @@ blox blox_use_(const void* address, size_t length) {
   return buffer;
 }
 
-#define blox__safe_subtract(a, b)\
-(b <= a ? 0 : b - a)
+#define blox__safe_subtract(a, b) (b <= a ? 0 : b - a)
 
 #define blox_use(array, length) blox_use_(array, length)
 
@@ -80,14 +79,13 @@ blox blox_use_(const void* address, size_t length) {
 
 #define blox_use_sequence(TYPE, start, end) blox_use(start, end - start)
 
-#define blox_use_view(TYPE, other, start, length)\
- blox_use(blox_index(TYPE, other, start), length)
+#define blox_use_view(TYPE, other, start, length) \
+  blox_use(blox_index(TYPE, other, start), length)
 
-#define blox_use_window(TYPE, other, start, end)\
- blox_use_view(other, start, blox__safe_subtract(end, start))
+#define blox_use_window(TYPE, other, start, end) \
+  blox_use_view(other, start, blox__safe_subtract(end, start))
 
-#define blox__safe_last(buffer) \
-  blox__safe_subtract((buffer).length, 1)
+#define blox__safe_last(buffer) blox__safe_subtract((buffer).length, 1)
 
 blox blox_use_string_(size_t width, const void* address) {
   typedef unsigned char byte;
@@ -415,3 +413,4 @@ int blox_compare_(void* lhs, size_t lmx, void* rhs, size_t rmx, size_t width) {
   (blox_compare(TYPE, lbx, rbx) >= 0)
 
 #endif  // BLOX_H_INCLUDED
+
