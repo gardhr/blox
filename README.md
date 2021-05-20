@@ -492,4 +492,15 @@ Returns true if `left` compares greater than or equal to `right`
 
 <br>
 
+`typedef void* (*blox_allocator)(void*, size_t)`
+
+<br>
+
+`blox_allocator blox_realloc(blox_allocator reset)`
+
+Sets the default allocator for all blox objects (must have the same interface as `realloc`)
+
+<br>
+
+
 

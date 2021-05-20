@@ -35,6 +35,15 @@ typedef struct {
   size_t capacity;
 } blox;
 
+typedef void* (*blox_allocator)(void*, size_t);
+
+blox_allocator blox_realloc(blox_allocator reset) {
+  static blox_allocator alloc = realloc;
+  if (reset)
+    alloc = reset;
+  return alloc;
+}
+
 blox blox_nil(void) {
   blox nil = {0};
   return nil;
@@ -54,18 +63,6 @@ blox blox_nil(void) {
 #define blox_empty(buffer) (blox_length(buffer) == 0)
 
 #define blox_capacity(buffer) (buffer).capacity
-
-blox blox_make_(size_t width, size_t length, int reserved) {
-  blox buffer = {0};
-  size_t capacity = 1;
-  while (capacity <= length)
-    capacity <<= 1;
-  buffer.data = calloc(capacity, width);
-  buffer.capacity = capacity;
-  if (!reserved)
-    buffer.length = length;
-  return buffer;
-}
 
 #define blox_make(TYPE, length) blox_make_(sizeof(TYPE), length, 0)
 
@@ -89,27 +86,6 @@ blox blox_use_(const void* data, size_t length) {
   blox_use_view(other, start, blox__safe_subtract(end, start))
 
 #define blox__safe_last(buffer) blox__safe_subtract((buffer).length, 1)
-
-blox blox_use_string_(size_t width, const void* data) {
-  typedef unsigned char byte;
-  byte* base = ((byte*)data);
-  byte* current = base;
-  for (;;) {
-    size_t count = width;
-    do {
-      if (*current != 0) {
-        current += count;
-        break;
-      } else
-        ++current;
-    } while (--count);
-    if (count == 0)
-      break;
-  }
-  size_t length = ((current - base) / width) - 1;
-  blox buffer = {base, length, length};
-  return buffer;
-}
 
 #define blox_use_string(TYPE, string) blox_use_string_(sizeof(TYPE), string)
 
@@ -190,30 +166,31 @@ blox blox_use_string_(size_t width, const void* data) {
     blox_set(TYPE, buffer, position, (value));  \
   } while (0)
 
-#define blox_resize(TYPE, buffer, size)                              \
-  do {                                                               \
-    size_t request = (size);                                         \
-    size_t capacity = (buffer).capacity;                             \
-    size_t length = (buffer).length;                                 \
-    if (request == length)                                           \
-      break;                                                         \
-    if (request >= capacity) {                                       \
-      if (!capacity)                                                 \
-        ++capacity;                                                  \
-      while (capacity <= request)                                    \
-        capacity <<= 1;                                              \
-      void* chunk = realloc((buffer).data, capacity * sizeof(TYPE)); \
-      if (chunk == NULL)                                             \
-        break;                                                       \
-      (buffer).data = chunk;                                         \
-      (buffer).capacity = capacity;                                  \
-    }                                                                \
-    if (request > length)                                            \
-      memset(blox_index(TYPE, buffer, length), 0,                    \
-             ((request - length) + 1) * sizeof(TYPE));               \
-    else                                                             \
-      memset(blox_index(TYPE, buffer, request), 0, sizeof(TYPE));    \
-    (buffer).length = request;                                       \
+#define blox_resize(TYPE, buffer, size)                               \
+  do {                                                                \
+    size_t request = (size);                                          \
+    size_t capacity = (buffer).capacity;                              \
+    size_t length = (buffer).length;                                  \
+    if (request == length)                                            \
+      break;                                                          \
+    if (request >= capacity) {                                        \
+      if (!capacity)                                                  \
+        ++capacity;                                                   \
+      while (capacity <= request)                                     \
+        capacity <<= 1;                                               \
+      void* chunk =                                                   \
+          blox_realloc(NULL)((buffer).data, capacity * sizeof(TYPE)); \
+      if (chunk == NULL)                                              \
+        break;                                                        \
+      (buffer).data = chunk;                                          \
+      (buffer).capacity = capacity;                                   \
+    }                                                                 \
+    if (request > length)                                             \
+      memset(blox_index(TYPE, buffer, length), 0,                     \
+             ((request - length) + 1) * sizeof(TYPE));                \
+    else                                                              \
+      memset(blox_index(TYPE, buffer, request), 0, sizeof(TYPE));     \
+    (buffer).length = request;                                        \
   } while (0)
 
 #define blox_reserve(TYPE, buffer, size) \
@@ -333,14 +310,6 @@ blox blox_use_string_(size_t width, const void* data) {
 #define blox_prepend_array(TYPE, buffer, array, length) \
   blox_prepend_array(TYPE, buffer, blox_use_array(TYPE, array, length))
 
-blox blox_clone_(size_t width, const void* data, size_t length) {
-  size_t size = length * width;
-  blox buffer = blox_make(char, size);
-  memcpy(buffer.data, data, size);
-  buffer.length = buffer.capacity = length;
-  return buffer;
-}
-
 #define blox_copy(TYPE, buffer, source)    \
   do {                                     \
     blox_shrink(buffer);                   \
@@ -393,6 +362,47 @@ blox blox_clone_(size_t width, const void* data, size_t length) {
     for (size_t index = 0, length = (buffer).length; index < length; ++index) \
       step(blox_index(TYPE, buffer, index), userdata);                        \
   } while (0)
+
+blox blox_make_(size_t width, size_t length, int reserved) {
+  blox buffer = {0};
+  size_t size = length * width;
+  if (reserved)
+    blox_reserve(char, buffer, size);
+  else
+    blox_resize(char, buffer, size);
+  buffer.length /= width;
+  buffer.capacity /= width;
+  return buffer;
+}
+
+blox blox_clone_(size_t width, const void* data, size_t length) {
+  size_t size = length * width;
+  blox buffer = blox_make(char, size);
+  memcpy(buffer.data, data, size);
+  buffer.length = buffer.capacity = length;
+  return buffer;
+}
+
+blox blox_use_string_(size_t width, const void* data) {
+  typedef unsigned char byte;
+  byte* base = ((byte*)data);
+  byte* current = base;
+  for (;;) {
+    size_t count = width;
+    do {
+      if (*current != 0) {
+        current += count;
+        break;
+      } else
+        ++current;
+    } while (--count);
+    if (count == 0)
+      break;
+  }
+  size_t length = ((current - base) / width) - 1;
+  blox buffer = {base, length, length};
+  return buffer;
+}
 
 typedef int (*blox_comparison)(const void*, const void*);
 
@@ -448,3 +458,4 @@ int blox_compare_(void* lhs, size_t lmx, void* rhs, size_t rmx, size_t width) {
   (blox_compare(TYPE, lbx, rbx) >= 0)
 
 #endif  // BLOX_H_INCLUDED
+
