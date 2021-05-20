@@ -240,6 +240,18 @@ Inserts a zero-filled object of `TYPE` at the end of the container
 
 <br>
 
+`void blox_push(TYPE, buffer, value)`
+
+Inserts `value` at the end of the container
+
+<br>
+
+`void blox_pop(TYPE, buffer)`
+
+Removes the last element, then shrinks the container by one (if possible)
+
+<br>
+
 `void blox_shift_by(TYPE, buffer, amount)`
 
 Removes the first `amount` elements from the front of the container
@@ -273,18 +285,6 @@ Removes all elements from index `start` up to (but excluding) `end`
 `void blox_erase_at(TYPE, buffer, start, amount)`
 
 Removes `amount` elements starting from index `start`
-
-<br>
-
-`void blox_push(TYPE, buffer, value)`
-
-Inserts `value` at the end of the container
-
-<br>
-
-`void blox_pop(TYPE, buffer)`
-
-Removes the last element, then shrinks the container by one (if possible)
 
 <br>
 
