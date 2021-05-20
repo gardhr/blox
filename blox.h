@@ -77,6 +77,8 @@ blox blox_use_(const void* address, size_t length) {
 
 #define blox_use_sequence(TYPE, start, end) blox_use(start, end - start)
 
+#include <stdio.h>
+
 blox blox_use_string_(size_t width, const void* address) {
   typedef unsigned char byte;
   byte* base = ((byte*)address);
@@ -93,7 +95,7 @@ blox blox_use_string_(size_t width, const void* address) {
     if (count == 0)
       break;
   }
-  size_t length = ((current - base) / width) - width;
+  size_t length = ((current - base) / width) - 1;
   blox buffer = {base, length, length};
   return buffer;
 }
@@ -124,7 +126,7 @@ blox blox_use_string_(size_t width, const void* address) {
 #define blox_clear_range(TYPE, buffer, start, end)                       \
   do {                                                                   \
     size_t begin = (start);                                              \
-    size_t length = (end) - begin;                                         \
+    size_t length = (end)-begin;                                         \
     memset(blox_index(TYPE, (buffer), begin), 0, length * sizeof(TYPE)); \
   } while (0)
 
@@ -134,13 +136,13 @@ blox blox_use_string_(size_t width, const void* address) {
 #define blox_clear(TYPE, buffer) \
   blox_clear_range(TYPE, buffer, 0, (buffer).length)
 
-#define blox_erase_range(TYPE, buffer, start, end) \
-  do {                                            \
-    TYPE* begin = blox_index(TYPE, (buffer), start);                 \
-    size_t count = end - start;                   \
-    size_t length = (buffer).length;                   \
+#define blox_erase_range(TYPE, buffer, start, end)                  \
+  do {                                                              \
+    TYPE* begin = blox_index(TYPE, (buffer), start);                \
+    size_t count = end - start;                                     \
+    size_t length = (buffer).length;                                \
     memmove(begin, begin + count, sizeof(TYPE) * (length - count)); \
-    blox_shrink_by(TYPE, (buffer), count);        \
+    blox_shrink_by(TYPE, (buffer), count);                          \
   } while (0)
 
 #define blox_insert(TYPE, buffer, index, value) \
