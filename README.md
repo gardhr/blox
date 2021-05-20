@@ -348,9 +348,9 @@ Splices the sequence from pointer `start` to `end` to the container `buffer` at 
 
 <br>
 
-`void blox_splice_string(TYPE, buffer, index, array)`
+`void blox_splice_string(TYPE, buffer, index, string)`
 
-Splices a zero-terminated `array` to the container `buffer` at `index`
+Splices a zero-terminated `string` of `TYPE` to the container `buffer` at `index`
 
 <br>
 
@@ -372,9 +372,9 @@ Appends the sequence from pointer `start` to `end` to the container
 
 <br>
 
-`void blox_append_string(TYPE, buffer, array)`
+`void blox_append_string(TYPE, buffer, string)`
 
-Appends a zero-terminated `array` to the container
+Appends a zero-terminated `string` of `TYPE` to the container
 
 <br>
 
@@ -396,9 +396,9 @@ Prepends the sequence from pointer `start` to `end` to the container
 
 <br>
 
-`void blox_prepend_string(TYPE, buffer, array)`
+`void blox_prepend_string(TYPE, buffer, string)`
 
-Prepends a zero-terminated `array` to the container
+Prepends a zero-terminated `string` of `TYPE` to the container
 
 <br>
 
