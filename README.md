@@ -276,12 +276,6 @@ Makes space at the front of the container for `amount` (zeroed out) elements (re
 
 <br>
 
-`void blox_erase(TYPE, buffer, index)`
-
-Erases the element at `index`
-
-<br>
-
 `void blox_erase_range(TYPE, buffer, start, end)`
 
 Removes all elements from index `start` up to (but excluding) `end`
@@ -291,6 +285,12 @@ Removes all elements from index `start` up to (but excluding) `end`
 `void blox_erase_at(TYPE, buffer, start, amount)`
 
 Removes `amount` elements starting from index `start`
+
+<br>
+
+`void blox_erase(TYPE, buffer, index)`
+
+Erases the element at `index`
 
 <br>
 
