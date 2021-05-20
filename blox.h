@@ -151,6 +151,9 @@ blox blox_use_string_(size_t width, const void* data) {
 
 #define blox_clear(TYPE, buffer) blox_clear_end(TYPE, buffer, 0)
 
+#define blox_erase(TYPE, buffer, index) \
+  blox_erase_at(TYPE, buffer, index, 1)
+
 #define blox_erase_at(TYPE, buffer, start, amount)                    \
   do {                                                                \
     TYPE* begin = blox_index(TYPE, (buffer), start);                  \

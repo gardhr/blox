@@ -88,6 +88,12 @@ int main(int argc, char** argv) {
   blox_for_each(int, cpy, print_int);
   puts("");
   
+  blox_erase(int, cpy, 2);
+  puts("\nAfter erasing 2nd element:");
+
+  blox_for_each(int, cpy, print_int);
+  puts("");
+  
   blox_free(cpy);
   return 0;
 }
