@@ -395,7 +395,7 @@ void* blox_find_(void* key,
                   (blox_comparison)comparison))
 
 /*
- FIXME: The logic behind the comparison is not entirely rigorous
+ FIXME: Not entirely rigorous
 */
 int blox_compare_(void* lhs, size_t lmx, void* rhs, size_t rmx, size_t width) {
   if (lmx != rmx)
