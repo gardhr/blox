@@ -50,35 +50,35 @@ Zeroes out the container, but doesn't free it (use with care!)
 
 `blox blox_create(TYPE)`
 
-Returns a blox with zero elements
+Returns a blox with zero elements (must be freed with `blox_free`)
 
 <br>
 
 `blox blox_make(TYPE, length)`
 
-Returns a blox with `length` elements (all zeroed out)
+Returns a blox with `length` elements, all zeroed out (must be freed with `blox_free`)
 
 <br>
 
 `blox blox_reserved(TYPE, length)`
 
-Returns a blox with `length` elements reserved (nominal size of container will be zero)
+Returns a blox with `length` elements reserved; nominal size of container will be zero  (must be freed with `blox_free`)
 
 <br>
 
 `blox blox_from_array(TYPE, array, length)`
 
-Construct a new blox containing a copy of `array`
+Construct a new blox containing a copy of `array` (must be freed with `blox_free`)
 
 <br>
 
 `blox blox_from_string(TYPE, string)`
 
-Construct a new blox from a zero-terminated `string` of `TYPE`
+Construct a new blox from a zero-terminated `string` of `TYPE` (must be freed with `blox_free`)
 
 <br>
 
-`blox blox_from_sequence(TYPE, start, end)`
+`blox blox_from_sequence(TYPE, start, end)` (must be freed with `blox_free`)
 
 Construct a new blox object by copying pointer ranges `start` to `end`
 
@@ -86,37 +86,37 @@ Construct a new blox object by copying pointer ranges `start` to `end`
 
 `blox blox_use(array, length)`
 
-Use `array` as if it were a normal blox object (note: use in conjunction with `blox_drop` rather than `blox_free`)
+Use `array` as if it were a normal blox object (must ***not*** be freed with `blox_free`)
 
 <br>
 
 `blox blox_use_array(TYPE, array, length)`
 
-Use `array` as if it were a normal blox object (note: use in conjunction with `blox_drop` rather than `blox_free`)
+Use `array` as if it were a normal blox object (must ***not*** be freed with `blox_free`)
 
 <br>
 
 `blox blox_use_string(TYPE, string)`
 
-Use a zero-terminated `string` of `TYPE` as if it were a normal blox object (note: use in conjunction with `blox_drop` rather than `blox_free`)
+Use a zero-terminated `string` of `TYPE` as if it were a normal blox object (must ***not*** be freed with `blox_free`)
 
 <br>
 
 `blox blox_use_sequence(TYPE, start, end)`
 
-Use a sequence (from pointer `start` to `end`) as if it were a normal blox object (note: use in conjunction with `blox_drop` rather than `blox_free`)
+Use a sequence (from pointer `start` to `end`) as if it were a normal blox object (must ***not*** be freed with `blox_free`)
 
 <br>
 
 `blox blox_use_window(TYPE, other, start, end)`
 
-Use a subsequence (from index `start` to `end`) of blox object `other` as if it were itself a normal blox object (note: use in conjunction with `blox_drop` rather than `blox_free`)
+Use a subsequence (from index `start` to `end`) of blox object `other` as if it were itself a normal blox object (must ***not*** be freed with `blox_free`)
 
 <br>
 
 `blox blox_use_view(TYPE, other, start, amount)`
 
-Use `amount` elements (starting from index `start`) of blox object `other` as if it were itself a normal blox object (note: use in conjunction with `blox_drop` rather than `blox_free`)
+Use `amount` elements (starting from index `start`) of blox object `other` as if it were itself a normal blox object (must ***not*** be freed with `blox_free`)
 
 <br>
 
