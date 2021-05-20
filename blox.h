@@ -57,8 +57,11 @@ blox blox_nil(void) {
 
 blox blox_make_(size_t width, size_t length, int empty) {
   blox buffer = {0};
-  buffer.data = calloc(length + 1, width);
-  buffer.capacity = length;
+  size_t capacity = 1;
+  while(capacity <= length)
+   capacity <<= 1;
+  buffer.data = calloc(capacity, width);
+  buffer.capacity = capacity;
   if (!empty)
     buffer.length = length;
   return buffer;
