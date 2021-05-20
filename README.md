@@ -198,6 +198,12 @@ Zeroes out all elements from index `start` up to (but excluding) `end` (the cont
 
 <br>
 
+`void blox_clear_at(TYPE, buffer, start, amount)`
+
+Zeroes out `amount` elements starting from index `start` (the container is ***not*** resized)
+
+<br>
+
 `void blox_clear_end(TYPE, buffer, start)`
 
 Zeroes out all elements from index `start` up to the last element (the container is ***not*** resized)
@@ -243,6 +249,18 @@ Inserts `value` at the front of the container (remaining elements are shifted to
 `void blox_unshift_by(TYPE, buffer, amount)`
 
 Makes space at the front of the container for `amount` (zeroed out) elements (remaining elements are shifted toward the back)
+
+<br>
+
+`void blox_erase_range(TYPE, buffer, start, end)`
+
+Removes all elements from index `start` up to (but excluding) `end`
+
+<br>
+
+`void blox_erase_at(TYPE, buffer, start, amount)`
+
+Removes `amount` elements starting from index `start`
 
 <br>
 
