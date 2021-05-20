@@ -134,16 +134,16 @@ blox blox_use_string_(size_t width, const void* address) {
 #define blox_clear(TYPE, buffer) \
   blox_clear_range(TYPE, buffer, 0, (buffer).length)
 
-/*
-#define blox_erase_range(TYPE, buffer, start, end)\
- do\
- {\
-  size_t begin = (start);\
-  size_t length = (end) - begin;\
-  memset(blox_index(TYPE, (buffer), begin), 0, length * sizeof(TYPE));\
- }\
- while(0)
-*/
+#define blox_erase_range(TYPE, buffer, start, end) \
+  do {                                            \                                    \
+    TYPE* begin = blox_begin(TYPE, (buffer));     \
+    TYPE* cursor = begin + start;                 \
+    if (cursor > blox_end(TYPE, (buffer)))        \
+      break;                                      \
+    size_t count = end - start;                   \
+    memmove(begin, cursor, sizeof(TYPE) * count); \
+    blox_shrink_by(TYPE, (buffer), count);        \
+  } while (0)
 
 #define blox_insert(TYPE, buffer, index, value) \
   do {                                          \
@@ -355,10 +355,6 @@ typedef int (*blox_comparison)(const void*, const void*);
 #define blox_sort(TYPE, buffer, comparison)           \
   qsort((buffer).data, (buffer).length, sizeof(TYPE), \
         (blox_comparison)comparison)
-
-/*
- TODO: blox_find
-*/
 
 void* blox_find_(void* key,
                  void* buffer,
