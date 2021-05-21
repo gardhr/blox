@@ -234,6 +234,12 @@ Returns `true` if the blox is empty (`buffer.length == 0`)
 
 <br>
 
+`void blox_clear(TYPE, buffer)`
+
+Zeroes out all elements (the container is ***not*** resized)
+
+<br>
+
 `void blox_clear_range(TYPE, buffer, start, end)`
 
 Zeroes out all elements from index `start` up to (but excluding) `end` (the container is ***not*** resized)
@@ -249,12 +255,6 @@ Zeroes out `amount` elements starting from index `start` (the container is ***no
 `void blox_clear_end(TYPE, buffer, start)`
 
 Zeroes out all elements from index `start` up to the last element (the container is ***not*** resized)
-
-<br>
-
-`void blox_clear(TYPE, buffer)`
-
-Zeroes out all elements (the container is ***not*** resized)
 
 <br>
 
