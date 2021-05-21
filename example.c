@@ -41,6 +41,7 @@ int compare_int(int* lhs, int* rhs) {
 }
 
 int main(int argc, char** argv) {
+
   blox stuff = {0};
 
   blox_push(info, stuff, make_info("Third"));
