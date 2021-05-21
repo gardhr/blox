@@ -1,6 +1,7 @@
 # blox
 
-Blox is single-header array library for C, implemented as a set of macros. 
+Blox is a single-header array library for C. Implemented as a set of macros and designed for ease of use, blox provides a wide range of useful functions for manipulating arrays of arbitrary type. While typically used for manipulating dynamic arrays, blox objects can also be attached to local variables. For sample usage, see `example.c`, `demo.c`, and `oom.c`. 
+
 
 ```
 typedef struct
