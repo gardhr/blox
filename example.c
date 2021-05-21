@@ -4,7 +4,7 @@
 #include "blox.h"
 
 /*
- Sample application using custom datatypes
+ Sample usage with a custom defined type
 */
 
 typedef struct {
@@ -37,7 +37,6 @@ void reverse_info(info* my) {
 }
 
 int main(int argc, char** argv) {
-
   blox stuff = {0};
 
   blox_push(info, stuff, make_info("Third"));
@@ -61,4 +60,3 @@ int main(int argc, char** argv) {
 
   return 0;
 }
-
