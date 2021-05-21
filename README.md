@@ -204,15 +204,15 @@ Returns a reference to the last element in the container
 
 <br>
 
-`void blox_resize(TYPE, buffer, size)`
+`void blox_resize(TYPE, buffer, length)`
 
-Resizes the container (and `buffer.length` is set to `size`)
+Resizes the container (and `buffer.length` is set to `length`)
 
 <br>
 
-`void blox_reserve(TYPE, buffer, size)`
+`void blox_reserve(TYPE, buffer, length)`
 
-Reserves `size` elements (`buffer.length` remains unchanged)
+Reserves `length` elements (`buffer.length` remains unchanged)
 
 <br>
 
