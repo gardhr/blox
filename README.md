@@ -402,9 +402,9 @@ Prepends `length` elements of `array` to the container
 
 <br>
 
-`void blox_copy(TYPE, buffer, source)`
+`void blox_copy(TYPE, buffer, other)`
 
-Copies `source` to `buffer`
+Copies blox `other` to `buffer`
 
 <br>
 
