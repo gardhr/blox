@@ -18,20 +18,20 @@ info make_info(const char* tag) {
   return fyi;
 }
 
-void free_info(info* my) {
-  blox_free(my->tag);
+void free_info(info* fyi) {
+  blox_free(fyi->tag);
 }
 
-void print_info(info* my) {
-  printf("TAG: %s\n", blox_begin(char, my->tag));
+void print_info(info* fyi) {
+  printf("TAG: %s\n", blox_begin(char, fyi->tag));
 }
 
 int compare_info(info* lhs, info* rhs) {
   return strcmp(blox_data(char, lhs->tag), blox_data(char, rhs->tag));
 }
 
-void reverse_info(info* my) {
-  blox_reverse(char, my->tag);
+void reverse_info(info* fyi) {
+  blox_reverse(char, fyi->tag);
 }
 
 int main(int argc, char** argv) {
