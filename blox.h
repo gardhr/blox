@@ -252,11 +252,11 @@ blox blox_use_(const void* data, size_t length) {
     if (amount == 0)                               \
       break;                                       \
     TYPE* begin = blox_begin(TYPE, (buffer));      \
-    TYPE* cursor = begin + (amount - 1);           \
+    TYPE* cursor = begin + (amount);           \
     if (cursor > blox_end(TYPE, (buffer)))         \
       break;                                       \
     memmove(begin, cursor, sizeof(TYPE) * amount); \
-    blox_shrink_by(TYPE, (buffer), amount);        \
+    blox_shrink_by(TYPE, (buffer), (buffer).length - amount);        \
   } while (0)
 
 #define blox_shift(TYPE, buffer) blox_shift_by(TYPE, buffer, 1)
