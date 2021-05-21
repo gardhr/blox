@@ -357,7 +357,7 @@ blox blox_use_(const void* data, size_t length) {
 
 #define blox_free(buffer) \
   do {                    \
-    free((buffer).data);  \
+    blox_realloc(NULL)((buffer).data, 0);  \
     blox_drop(buffer);    \
   } while (0)
 
