@@ -3,10 +3,14 @@
 #include <time.h>
 #include "blox.h"
 
+/*
+ Sample application using custom datatypes
+*/
+
 typedef struct {
   blox tag;
   /*
-   ...
+   ...other members...
   */
 } info;
 
@@ -32,14 +36,6 @@ void reverse_info(info* my) {
   blox_reverse(char, my->tag);
 }
 
-void print_int(int* ptr) {
-  printf("%d, ", *ptr);
-}
-
-int compare_int(int* lhs, int* rhs) {
-  return *lhs - *rhs;
-}
-
 int main(int argc, char** argv) {
 
   blox stuff = {0};
@@ -63,52 +59,6 @@ int main(int argc, char** argv) {
   blox_for_each(info, stuff, free_info);
   blox_free(stuff);
 
-  int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0};
-  blox cpy = blox_from_string(int, arr);
-  
-  puts("\nBefore blox_unshift_by:");
-  blox_for_each(int, cpy, print_int);
-  puts("");
-
-  blox_unshift_by(int, cpy, 4);
-
-  puts("\nAfter blox_unshift_by(int, cpy, 4):");
-
-  blox_for_each(int, cpy, print_int);
-  puts("");
-
-  blox_prepend_string(int, cpy, arr);
-  puts("\nAfter prepend:");
-
-  blox_for_each(int, cpy, print_int);
-  puts("");
-
-  blox_erase_at(int, cpy, 5, 3);
-  puts("\nAfter erasing 3 elements, starting from the 5th index:");
-
-  blox_for_each(int, cpy, print_int);
-  puts("");
-  
-  blox_erase(int, cpy, 2);
-  puts("\nAfter erasing 2nd element:");
-
-  blox_for_each(int, cpy, print_int);
-  puts("");
-  
-  blox_splice_string(int, cpy, 2, arr);
-  puts("\nAfter splicing array into copy at the 2nd element:");
-
-  blox_for_each(int, cpy, print_int);
-  puts("");
-  
-  blox slc = blox_slice_first(int, cpy, 4);
-  puts("\nAfter making slice of first 4 elements:");
-
-  blox_for_each(int, slc, print_int);
-  puts(""); 
-  
-  blox_free(slc);
-  blox_free(cpy);
   return 0;
 }
 
