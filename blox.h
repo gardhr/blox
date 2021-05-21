@@ -255,8 +255,8 @@ blox blox_use_(const void* data, size_t length) {
     TYPE* cursor = begin + (amount);           \
     if (cursor > blox_end(TYPE, (buffer)))         \
       break;                                       \
-    memmove(begin, cursor, sizeof(TYPE) * amount); \
-    blox_shrink_by(TYPE, (buffer), (buffer).length - amount);        \
+    memmove(begin, cursor, sizeof(TYPE) * ((buffer).length - (amount))); \
+    blox_shrink_by(TYPE, (buffer), amount);        \
   } while (0)
 
 #define blox_shift(TYPE, buffer) blox_shift_by(TYPE, buffer, 1)
