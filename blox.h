@@ -396,7 +396,8 @@ blox blox_clone_(size_t width, const void* data, size_t length) {
   size_t size = length * width;
   blox buffer = blox_make(char, size);
   memcpy(buffer.data, data, size);
-  buffer.length = buffer.capacity = length;
+  buffer.length = length;
+  buffer.capacity /= width;
   return buffer;
 }
 
