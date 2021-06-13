@@ -329,7 +329,7 @@ blox blox_use_(const void* data, size_t length) {
 
 #define blox_copy(TYPE, buffer, source)    \
   do {                                     \
-    blox_shrink(buffer);                   \
+    blox_shrink(TYPE, buffer);                   \
     blox_append(TYPE, (buffer), (source)); \
   } while (0)
 
