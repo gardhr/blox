@@ -29,23 +29,6 @@ SOFTWARE.
 #include <memory.h>
 #include <stdlib.h>
 
-/*
-// TODO:
-int blox__fatal_(const char* condition, const char* function)
-{
- fprintf(stderr, "Error: [%s] in %s\n", condition, function);
- exit(1);
- return 0; // Ignored
-}
-
-#define blox__sentry(result, condition, function)\
- (condition ? blox__fatal_(#condition, function) : result)
-
-#define blox_use_window(TYPE, other, start, end) \
-  blox_use_view(TYPE, other, start, blox__sentry(end - start, end < start ||
-(end - start) > (other).length, "blox_use_window(TYPE, other, start, end)"))
-*/
-
 typedef struct {
   void* data;
   size_t length;
